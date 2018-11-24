@@ -55,3 +55,21 @@ p {
 img {
 	max-width: 100%;
 }
+
+@media (min-width: 1000px) {
+	body {
+		display: flex;
+		max-width: 100%;
+		height: calc(100vh - 2rem);
+		justify-content: center;
+		align-items: center;
+	}
+
+	figure, main {
+		width: 375px;
+	}
+
+	figure {
+		margin-right: 4rem;
+	}
+}
