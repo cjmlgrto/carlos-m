@@ -14,10 +14,17 @@ html {
 	line-height: 1.625;
 	font-family: "qWNHNgXEpEmhJDNFu8", "Gill Sans", "Gill Sans MS", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 
+	padding: 1rem;
+
 	color: var(--color-foreground);
 	background-color: var(--color-background);
 
 	-webkit-font-smoothing: antialiased;
+}
+
+body {
+	margin: 0 auto;
+	max-width: 375px;
 }
 
 a, a:hover, a:visited {
@@ -39,6 +46,10 @@ h1 {
 
 	color: var(--color-accent);
 	border-bottom: 1px solid #292826;
+}
+
+p {
+	margin-bottom: 1.625em;
 }
 
 img {
