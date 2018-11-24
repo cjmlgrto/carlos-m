@@ -56,6 +56,14 @@ img {
 	max-width: 100%;
 }
 
+figure {
+	animation: intro 1s cubic-bezier(.06, .53, .41, .89);
+}
+
+main {
+	animation: intro 3s cubic-bezier(.06, .53, .41, .89)
+}
+
 @media (min-width: 1000px) {
 	body {
 		display: flex;
@@ -71,5 +79,14 @@ img {
 
 	figure {
 		margin-right: 4rem;
+	}
+}
+
+@keyframes intro {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
