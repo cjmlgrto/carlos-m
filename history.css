@@ -74,6 +74,7 @@ li time {
 }
 
 li span {
+	font-weight: normal;
 	color: var(--color-foreground);
 }
 
