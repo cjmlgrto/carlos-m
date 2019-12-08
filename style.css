@@ -1,7 +1,7 @@
 :root {
-	--color-accent: #4687AD;
-	--color-background: #131313;
-	--color-foreground: #F5E5CE;
+	--color-accent: #76B35C;
+	--color-background: #141414;
+	--color-foreground: #FFFFFF;
 }
 
 * {
@@ -14,7 +14,7 @@ html {
 	line-height: 1.625;
 	font-family: "qWNHNgXEpEmhJDNFu8", "Gill Sans", "Gill Sans MS", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 
-	padding: 1rem;
+	padding: 2rem;
 
 	color: var(--color-foreground);
 	background-color: var(--color-background);
@@ -24,10 +24,10 @@ html {
 
 body {
 	margin: 0 auto;
-	max-width: 375px;
+	max-width: 24rem;
 }
 
-a, a:hover, a:visited {
+a {
 	text-decoration: none;
 	font-weight: bold;
 	color: var(--color-accent);
@@ -39,47 +39,58 @@ a:active {
 
 h1 {
 	font-size: 1.5rem;
-	line-height: 1;
+	margin: 0;
+}
 
-	margin-bottom: 2rem;
-	padding-bottom: 1rem;
-
+h2 {
+	font-size: 1rem;
+	font-weight: normal;
 	color: var(--color-accent);
-	border-bottom: 1px solid #292826;
 }
 
 p {
 	margin-bottom: 1.625em;
 }
 
+small {
+	font-size: 0.625rem;
+	text-transform: uppercase;
+	letter-spacing: 0.03125rem;
+	opacity: 0.5;
+}
+
+small a {
+	color: var(--color-foreground);
+	font-weight: inherit;
+}
+
 img {
 	max-width: 100%;
 }
 
+header {
+	margin-bottom: 2rem;
+}
+
 figure {
 	animation: intro 1s cubic-bezier(.06, .53, .41, .89);
+	margin-bottom: 2rem;
 }
 
 main {
-	animation: intro 3s cubic-bezier(.06, .53, .41, .89)
+	animation: intro 4s cubic-bezier(.06, .53, .41, .89)
 }
 
-@media (min-width: 1000px) {
-	body {
-		display: flex;
-		max-width: 100%;
-		height: calc(100vh - 2rem);
-		justify-content: center;
-		align-items: center;
-	}
+nav {
+	margin-top: 3rem;
+	margin-bottom: 4rem;
 
-	figure, main {
-		width: 375px;
-	}
+	display: flex;
+	align-items: center;
+}
 
-	figure {
-		margin-right: 4rem;
-	}
+nav > a:not(:last-child) {
+	margin-right: 1.5rem;
 }
 
 @keyframes intro {
