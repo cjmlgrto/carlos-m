@@ -93,6 +93,20 @@ nav > a:not(:last-child) {
 	margin-right: 1.5rem;
 }
 
+html:before {
+	content: 'Carlos Melegrito — Product Designer and Comp Sci Grad';
+	display: block;
+	position: fixed;
+	font-size: 12vw;
+	z-index: -1;
+	font-weight: bold;
+	max-width: 75vw;
+	line-height: 1;
+	opacity: 0.01;
+	top: -5vh;
+	left: -5vh;
+}
+
 @keyframes intro {
 	from {
 		opacity: 0;
