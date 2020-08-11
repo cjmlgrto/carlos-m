@@ -1,7 +1,7 @@
 :root {
-	--color-accent: #76B35C;
-	--color-background: #141414;
-	--color-foreground: #FFFFFF;
+	--color-accent: #3e824d;
+	--color-background: #F7F7F5;
+	--color-foreground: #131313;
 }
 
 * {
@@ -74,7 +74,6 @@ header {
 
 figure {
 	animation: intro 1s cubic-bezier(.06, .53, .41, .89);
-	margin-bottom: 2rem;
 }
 
 main {
