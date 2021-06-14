@@ -2,6 +2,7 @@
 	--color-accent: #3e824d;
 	--color-background: #F7F7F5;
 	--color-foreground: #131313;
+	--color-midground: #828270;
 }
 
 * {
@@ -48,8 +49,29 @@ h2 {
 	color: var(--color-accent);
 }
 
+h3 {
+	font-size: 1rem;
+	letter-spacing: 0.1rem;
+	text-transform: uppercase;
+	color: var(--color-midground);
+}
+
 p {
 	margin-bottom: 1.625em;
+}
+
+ul {
+	list-style: none;
+}
+
+ul > li::before {
+	content: '';
+	width: 0.5rem;
+	height: 0.5rem;
+	margin-left: -1.5rem;
+	margin-right: 1rem;
+	display: inline-block;
+	background-color: var(--color-midground);
 }
 
 small {
