@@ -1,6 +1,12 @@
+@font-face {
+	font-family: "ProspectusPro";
+	font-weight: bold;
+	src: url('fonts/ProspectusProL-Black.woff') format('woff2'), url('/fonts/ProspectusProL-Black.woff') format('woff');
+}
+
 :root {
-	--color-background: #000;
-	--color-foreground: #fff;
+	--color-background: #000000;
+	--color-foreground: #f7f7f7;
 }
 
 * {
@@ -43,15 +49,21 @@ section > * {
 
 a {
 	color: var(--color-foreground);
-	text-decoration: underline;
+	text-decoration: none;
+	display: inline-block;
+	border-bottom: 2px solid rgba(255,255,255,.25);
+}
+
+a:hover {
+	border-bottom-color: rgba(255,255,255,.5);
 }
 
 h1 {
-	font-size: 5.6rem;
-	letter-spacing: -0.1rem;
+	font-size: 5.2rem;
 	line-height: 0.9375em;
-	font-weight: normal;
+	font-weight: bold;
 	margin-bottom: 4rem;
+	font-family: "ProspectusPro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 }
 
 ul {
@@ -76,7 +88,7 @@ section {
 
 @media (min-width: 40rem) {
 	html {
-		padding: 2rem;
+		padding: 6rem;
 	}
 
 	body {
@@ -95,6 +107,12 @@ section {
 	img {
 		width: 80%;
 		-webkit-transform: rotate(-5deg) translateY(-2rem);
+	}
+}
+
+@media (min-width: 1024px) {
+	html {
+		font-size: 120%;
 	}
 }
 
