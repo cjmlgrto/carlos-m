@@ -51,11 +51,11 @@ a {
 	color: var(--color-foreground);
 	text-decoration: none;
 	display: inline-block;
-	border-bottom: 2px solid rgba(255,255,255,.25);
+	border-bottom: 2px solid rgba(0,0,0,.25);
 }
 
 a:hover {
-	border-bottom-color: rgba(255,255,255,.5);
+	border-bottom-color: rgba(0,0,0,.5);
 }
 
 h1 {
