@@ -5,8 +5,8 @@
 }
 
 :root {
-	--color-background: #000000;
-	--color-foreground: #f7f7f7;
+	--color-background: #f5f5f5;
+	--color-foreground: #333333;
 }
 
 * {
@@ -61,7 +61,7 @@ a:hover {
 h1 {
 	font-size: 5.2rem;
 	line-height: 0.9375em;
-	font-weight: bold;
+	font-weight: 800;
 	margin-bottom: 4rem;
 	font-family: "ProspectusPro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 }
@@ -75,8 +75,8 @@ li {
 }
 
 img {
-	width: 50%;
-	margin: 2rem auto;
+	width: 80%;
+	margin: 2rem auto 4rem;
 	display: block;
 
 	-webkit-transform: rotate(-5deg);
