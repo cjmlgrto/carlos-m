@@ -58,11 +58,23 @@ a {
 	color: var(--color-foreground);
 	text-decoration: none;
 	display: inline-block;
-	border-bottom: 2px solid rgba(0,0,0,.25);
+	margin-right: 0.25rem;
+	position: relative;
 }
 
-a:hover {
-	border-bottom-color: rgba(0,0,0,.5);
+a:after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 1.5px;
+	bottom: -1px;
+	background-color: var(--color-foreground);
+	opacity: 0.25;
+}
+
+a:hover:after {
+	opacity: 0.75;
 }
 
 h1 {
@@ -79,6 +91,14 @@ ul {
 
 li {
 	margin-bottom: 0.5rem;
+	min-height: 1.25rem;
+}
+
+small {
+	font-size: 0.66rem;
+	display: inline-block;
+	color: var(--color-foreground);
+	opacity: 0.5;
 }
 
 img {
@@ -123,7 +143,7 @@ section {
 	}
 }
 
-@media (min-height: 56rem) {
+@media (min-height: 64rem) {
 	html {
 		display: flex;
 		align-items: center;
