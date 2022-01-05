@@ -9,6 +9,13 @@
 	--color-foreground: #333333;
 }
 
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background: #020418;
+		--color-foreground: #E3EBF6;
+	}
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -116,7 +123,7 @@ section {
 	}
 }
 
-@media (min-height: 48rem) {
+@media (min-height: 56rem) {
 	html {
 		display: flex;
 		align-items: center;
