@@ -3,6 +3,7 @@ title: Transparent, Online, You
 date: 2017-04-18
 preview: /uploads/blog/2017/2017-04-03-digital-leadership/preview.jpg
 image: /uploads/blog/2017/2017-04-03-digital-leadership/lasmeninas.jpg
+featured: true
 ---
 
 I'll ask you a question, and I want you to answer it truthfully: when people talk to you online, to whom are they really speaking to? A follow-up question: are you the same human on the web as you are in-person?

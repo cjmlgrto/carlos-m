@@ -1,4 +1,7 @@
 ---
-title: Blog
-layout: "blog"
+title: Hello, I'm Carlos!
+subtitle: About Me
+layout: home
 ---
+
+Hello
