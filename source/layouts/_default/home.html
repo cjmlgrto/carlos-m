@@ -12,7 +12,7 @@
 	</div>
 </section>
 <section class="shorter blog grid">
-		<span class="blog--year grid--col--mini caps">Featured Articles</span>
+		<span class="blog--year grid--col--mini caps">Featured Writing</span>
 		<div class="blog--items grid--col--maxi">
 			{{ range where .Pages ".Params.featured" true }}
 				<a href="{{ if .Params.Link }}{{ .Params.Link }}{{ else }}{{ .Permalink }}{{ end }}" class="blog--item">

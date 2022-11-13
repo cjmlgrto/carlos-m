@@ -3,6 +3,7 @@ title: The 9 Billion Dollar Tech Startup
 date: 2016-03-10
 image: /uploads/blog/2016/2016-03-10-the-9-billion-dollar-tech-startup/imgs/atlassian_office.jpg
 preview: /uploads/blog/2016/2016-03-10-the-9-billion-dollar-tech-startup/imgs/atlassian_facade.jpg
+featured: true
 ---
 
 **Note:** this post was originally published for a university assignment. I was tasked to cover an enterprise I found interesting, and as a result — decided to write about the story behind the Atlassian. You can view the [original article here](http://cjmlgrto.tumblr.com/post/140780509035/the-9-billion-dollar-tech-startup).

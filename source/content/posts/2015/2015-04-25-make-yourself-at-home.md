@@ -2,6 +2,7 @@
 title: Make Yourself At Home
 date: 2015-04-25
 subtitle: Welcome to my abode on the web.
+featured: true
 ---
 
 Drive down the lane. Park parallel to the sidewalk. Step out of the car. Walk to the front door, knock and step inside. Imagine seeing the inside of a house built by a master woodsman, looking at the intricate, carved details on the doors, nuances between cabinets, and the evenly-spaced, meticulously placed wooden floor.

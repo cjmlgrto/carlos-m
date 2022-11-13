@@ -3,6 +3,7 @@ title: Visiting Vietnam
 date: 2014-01-16
 image: /uploads/blog/2014/2014-01-16-visiting-vietnam/cjmlgrto.jpg
 preview: /uploads/blog/2014/2014-01-16-visiting-vietnam/field.jpg
+featured: true
 ---
 
 What’s your most recent adventure? To further delve deep: what do you think defines an adventure? If anything, I’d like to argue and point out that an adventure shouldn’t be defined as a trip filled with personal illusions of grandeur — the epicness of a climb through the Himalayas, or a deep sea dive into the Marianas — no.

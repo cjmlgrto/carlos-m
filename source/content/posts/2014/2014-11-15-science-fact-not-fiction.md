@@ -2,6 +2,7 @@
 title: Science Fact, Not Fiction
 date: 2014-11-15
 subtitle: A review of Interstellar.
+featured: true
 ---
 
 Nolan’s new cinematic epic, _Interstellar_, launched in theatres just last week. Like _Inception_, the new space-drama is ambigous; open-ended, and therefore doused in the ambition of igniting rumination. I walked out of the cinema in deep thought, and along with it, a headache — perhaps the best headache I’ve ever had.

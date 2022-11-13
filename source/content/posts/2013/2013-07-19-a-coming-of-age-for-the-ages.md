@@ -2,6 +2,7 @@
 title: A Coming-of-Age Film, For the Ages
 date: 2013-07-19
 subtitle: My review of Studio Ghibli's _From Up on Poppy Hill_.
+featured: true
 ---
 
 I recently watched [From Up On Poppy Hill](http://trailers.apple.com/trailers/independent/fromuponpoppyhill/). I can only tell that it’s one of the most beautiful movies I’ve seen all year, because this is one of the only few that show lovely cinematography and at the same time deliver a good, heartwarming story.

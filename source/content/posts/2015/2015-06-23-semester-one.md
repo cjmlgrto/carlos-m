@@ -2,6 +2,7 @@
 title: Semester One
 date: 2015-06-23
 subtitle: My first 6 months at Monash University
+featured: true
 ---
 
 I’m half-way through my first year at university — but I find that hard to believe. I feel like I’ve just been through an entire year: because I’ve learnt so much — more than I’d ever in the past few years of my life.

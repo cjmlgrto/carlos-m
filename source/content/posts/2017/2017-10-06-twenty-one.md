@@ -2,6 +2,7 @@
 title: Twenty-One Things
 date: 2017-10-06
 preview: /uploads/blog/2017/2017-10-06-twenty-one/preview.jpg
+featured: true
 ---
 
 1. Take care of the people that raised you.

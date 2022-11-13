@@ -2,6 +2,7 @@
 title: Eighteen Things
 date: 2014-10-05
 subtitle: I've learned a lot in my 18 years.
+featured: true
 ---
 
 1. Your best work is improvised.

@@ -2,6 +2,7 @@
 title: Global Hunger Hack
 date: 2016-03-04
 preview: /uploads/blog/2016/2016-03-04-global-hunger-hack/preview.jpg
+featured: true
 ---
 
 I spent the entirety of the past weekend at a [hackathon](https://www.monash.edu/science/about/events/global-hunger-hack) for [my course](http://haveyougottheedge.com) — and I can only say that it’s been insanely _exhilarating_.

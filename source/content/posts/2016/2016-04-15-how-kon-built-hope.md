@@ -4,6 +4,7 @@ date: 2016-04-15
 preview: /uploads/blog/2016/2016-04-15-how-kon-built-hope/imgs/preview.jpg
 image: /uploads/blog/2016/2016-04-15-how-kon-built-hope/imgs/asrc.jpg
 style: /uploads/blog/2016/2016-04-15-how-kon-built-hope/style.css
+featured: true
 ---
 
 **Note:** this post was originally published for a university assignment. I was tasked to cover an enterprise I found interesting, and as a result — decided to write about the story behind the Asylum Seeker Resource Centre. You can view the [original article here](http://cjmlgrto.tumblr.com/post/142767920215/how-kon-built-hope).

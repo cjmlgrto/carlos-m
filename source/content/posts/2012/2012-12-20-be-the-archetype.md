@@ -2,6 +2,7 @@
 title: Be The Archetype
 date: 2012-12-20
 subtitle: "Design is a public process. Make an example of yourself through your words and work."
+featured: true
 ---
 
 > “Public working leads to public criticism, and developing and articulating the etiquette around providing feedback is now a necessity to develop thicker skins and more eloquent tongues.”
