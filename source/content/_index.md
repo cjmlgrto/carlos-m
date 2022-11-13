@@ -1,6 +1,7 @@
 ---
 title: Hello, I'm Carlos!
 subtitle: About Me
+image: /uploads/home/carlos.jpg
 layout: home
 ---
 
