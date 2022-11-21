@@ -3,7 +3,7 @@
 // ------------------------------------------
 
 .home {
-    padding: 0 4rem 4rem;
+    padding: 0 2rem 2rem;
 
     .page--image {
         max-height: 100%;
@@ -75,6 +75,8 @@
 @media (min-width: $width-small) {
 
 	.home {
+        padding: 0 4rem 4rem;
+
         display: flex;
         justify-content: space-between;
 
