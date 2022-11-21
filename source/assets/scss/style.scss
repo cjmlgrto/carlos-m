@@ -9,6 +9,7 @@ $color: #{{ .Site.Params.Color }};
 @import 'header';
 @import 'page';
 @import 'blog';
+@import 'home';
 @import 'work';
 @import 'footer';
 
