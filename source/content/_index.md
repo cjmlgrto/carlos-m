@@ -7,6 +7,6 @@ layout: home
 
 I'm a product designer and user interface engineer based in Melbourne, Australia.
 
-Currently, I'm working on helping design the future of modern, digital banking over at [ANZ Plus](https://www.anz.com.au/plus/), as a consultant under [Itty Bitty Apps](https://www.ittybittyapps.com).
+Currently, I'm building the future of modern, digital banking over at [ANZ Plus](https://www.anz.com.au/plus/), and designing [Reveal](https://revealapp.com), a powerful macOS app for iOS engineers.
 
-Outside of work, I'm also a [food critic](https://food-spots.com.au/), croissant enthusiast, runner, [(ex) film photographer](https://instagram.com/cjmlgrto), and amateur tart-maker.
+Outside of work, I [bake tarts](https://www.tartvillain.com/), go for runs, [take film photos](https://instagram.com/cjmlgrto), and occassionally, [critique food spots](https://food-spots.com.au/).
