@@ -1,15 +1,3 @@
-@font-face {
-    font-family: 'SF Mono';
-    src: url('SF-Mono-Regular.otf') format('truetype');
-    font-weight: normal;
-}
-
-@font-face {
-    font-family: 'SF Mono';
-    src: url('SF-Mono-Semibold.otf') format('truetype');
-    font-weight: bold;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -17,9 +5,9 @@
 }
 
 :root {
-    --background-color: black;
-    --foreground-color: #696969;
-    --accent-color: white;
+    --background-color: #e6e2e0;
+    --foreground-color: #898989;
+    --accent-color: #f5f5f5;
 }
 
 ::selection {
@@ -33,40 +21,35 @@ html {
 
     height: 100vh;
 
-    background-image: url(mac.png);
+    background-image: url(window.png);
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: bottom center;
 }
 
 body {
-    font-family: 'SF Mono', monospace;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 15px;
     line-height: 1.5;
     mix-blend-mode: difference;
-
-    /* -webkit-font-smoothing: none; */
+    -webkit-font-smoothing: antialiased;
 }
 
 @media (min-width: 540px) {
     html {
-        background-size: 75% auto;
+        background-size: 50% auto;
         background-position: bottom right;
     }
 }
 
 a:link, a:active, a:hover, a:visited {
     color: var(--accent-color);
-    font-weight: bold;
+    font-weight: 500;
     text-decoration: none;
-    
-    text-transform: uppercase;
-    padding: 0 2px;
 }
 
 a:active, a:hover {
-    color: var(--background-color);
-    background-color: var(--accent-color);
+    border-bottom: 1px solid var(--background-color);
 }
 
 p {
