@@ -17,27 +17,41 @@
 }
 
 :root {
-    --background-color: white;
-    --foreground-color: #484848;
-    --accent-color: #663399;
-    --divider-color: #66339935;
+    --background-color: black;
+    --foreground-color: #696969;
+    --accent-color: white;
+}
+
+::selection {
+    color: var(--background-color);
+    background-color: var(--accent-color);
+}
+
+html {
+    color: var(--foreground-color);
+    background-color: var(--background-color);
+
+    height: 100vh;
+
+    background-image: url(mac.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: bottom center;
 }
 
 body {
     font-family: 'SF Mono', monospace;
     font-size: 15px;
     line-height: 1.5;
+    mix-blend-mode: difference;
 
-    color: var(--foreground-color);
-    background-color: var(--background-color);
+    /* -webkit-font-smoothing: none; */
 }
 
-@media (min-width: 400px) {
-    body {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        height: 100vh;
+@media (min-width: 540px) {
+    html {
+        background-size: 75% auto;
+        background-position: bottom right;
     }
 }
 
@@ -45,7 +59,14 @@ a:link, a:active, a:hover, a:visited {
     color: var(--accent-color);
     font-weight: bold;
     text-decoration: none;
-    border-bottom: 1px solid var(--divider-color);
+    
+    text-transform: uppercase;
+    padding: 0 2px;
+}
+
+a:active, a:hover {
+    color: var(--background-color);
+    background-color: var(--accent-color);
 }
 
 p {
@@ -53,7 +74,7 @@ p {
 }
 
 main {
-    max-width: 380px;
-    padding: 30px;
-    margin: 0 auto;
+    max-width: 480px;
+    padding: 48px;
+    margin: 0;
 }
