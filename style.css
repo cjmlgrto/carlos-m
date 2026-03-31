@@ -19,7 +19,7 @@ html {
     color: var(--foreground-color);
     background-color: var(--background-color);
 
-    height: 100vh;
+    height: 100%;
 
     background-image: url(window.png);
     background-repeat: no-repeat;
@@ -37,7 +37,7 @@ body {
 
 @media (min-width: 540px) {
     html {
-        background-size: 50% auto;
+        background-size: 512px 512px;
         background-position: bottom right;
     }
 }
