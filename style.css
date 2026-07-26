@@ -1,63 +1,76 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* =========================================================================
+   Font — swap this one value to change the typeface everywhere.
+   Keep it monospace so the ASCII grid stays perfectly aligned.
+   ========================================================================= */
+@font-face {
+  font-family: sf-mono;
+  src: url(SF-Mono-Regular.otf) format("opentype");
 }
 
 :root {
-    --background-color: #e6e2e0;
-    --foreground-color: #898989;
-    --accent-color: #f5f5f5;
+  --font: sf-mono, "SF Mono", "SFMono-Regular", ui-monospace, Menlo, "Roboto Mono", monospace;
+
+  --font-size: 15px;      /* fallback only — responsive size is set in script.js (FS_MIN/FS_MAX/FS_VW) */
+  --line-height: 1.5;     /* row height multiplier */
+
+  /* Light mode (default) */
+  --bg: #f4f4f4;   /* page background */
+  --fg: #1a1a1a;   /* revealed text */
+  --dim: #c9c9c9;  /* the random noise characters */
 }
 
-::selection {
-    color: var(--background-color);
-    background-color: var(--accent-color);
+/* Dark mode — follows the OS setting. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0d0d;
+    --fg: #f4f4f4;
+    --dim: #3a3a3a;
+  }
 }
 
-html {
-    color: var(--foreground-color);
-    background-color: var(--background-color);
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    height: 100vh;
-
-    background-image: url(window.png);
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: bottom center;
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-    mix-blend-mode: difference;
-    -webkit-font-smoothing: antialiased;
+#grid {
+  position: fixed;
+  inset: 0;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  font-variant-ligatures: none;
+  user-select: none;
+  cursor: default;
 }
 
-@media (min-width: 540px) {
-    html {
-        background-size: 512px 512px;
-        background-position: bottom right;
-    }
+.row { white-space: pre; }
+
+/* Every cell is one monospace character. */
+.cell {
+  display: inline-block;
+  color: var(--dim);
+  transition: color 220ms ease;
+}
+/* A cell that has settled onto its final letter. */
+.cell.on { color: var(--fg); }
+
+/* Visually hidden but available to screen readers / no-JS. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-a:link, a:active, a:hover, a:visited {
-    color: var(--accent-color);
-    font-weight: 500;
-    text-decoration: none;
-}
-
-a:active, a:hover {
-    border-bottom: 1px solid var(--background-color);
-}
-
-p {
-    margin-bottom: 15px;
-}
-
-main {
-    max-width: 480px;
-    padding: 48px;
-    margin: 0;
+/* Respect users who don't want motion: skip the noise, just show the text. */
+@media (prefers-reduced-motion: reduce) {
+  .cell { transition: none; }
 }
