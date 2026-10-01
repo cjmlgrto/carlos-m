@@ -1,0 +1,238 @@
+/* =========================================================================
+   30 — "It's dough time." event page
+   Mobile-first; grows into the design's fixed 640px column on wider screens.
+   Colors are the iOS system colors the Sketch file was drawn with.
+   ========================================================================= */
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --column: 640px;
+
+  /* Light mode (default) */
+  --bg: #ffffff;                        /* systemBackground */
+  --label: #000000;                     /* label */
+  --secondary: rgba(60, 60, 67, 0.6);   /* secondaryLabel */
+  --divider: rgba(120, 120, 128, 0.2);  /* systemFill */
+  --red: #ff383c;                       /* systemRed */
+  --tile: #ffffff;
+  --tile-edge: rgba(0, 0, 0, 0.1);
+  --accent: #2572fa;                    /* button blue from the design */
+}
+
+/* Dark mode — follows the OS setting. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --label: #ffffff;
+    --secondary: rgba(235, 235, 245, 0.6);
+    --divider: rgba(120, 120, 128, 0.36);
+    --red: #ff4245;
+    --tile: #1c1c1e;
+    --tile-edge: rgba(255, 255, 255, 0.1);
+  }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  background: var(--bg);
+  color: var(--label);
+  font-family: var(--font);
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: var(--column);
+  margin: 0 auto;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+/* ---- Header ------------------------------------------------------------- */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header h1 {
+  font-size: clamp(40px, 13vw, 56px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.0143em;   /* -0.8px at 56px */
+}
+
+.header p {
+  font-size: 17px;
+  line-height: 24px;
+  text-wrap: balance;
+}
+
+/* ---- Graphic ------------------------------------------------------------ */
+/* Three icons in a row; they shrink to fit narrow screens and top out at
+   128px in a 256px-tall band, as in the design. */
+.graphic {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding-block: clamp(24px, 10vw, 64px);
+}
+
+.graphic img {
+  display: block;
+  width: calc((100% - 32px) / 3);
+  max-width: 128px;
+  height: auto;
+}
+
+/* ---- Footer ------------------------------------------------------------- */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+}
+
+.dates {
+  list-style: none;
+  width: 274px;
+  max-width: 100%;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-inline: 32px;
+  text-align: left;
+}
+
+.date + .date {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider);
+}
+
+/* Calendar tile */
+.calendar {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--tile);
+  box-shadow: 0 0 0 1px var(--tile-edge);
+  font-weight: 700;
+}
+
+.calendar .month {
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.calendar .day {
+  font-size: 17px;
+  line-height: 17px;
+}
+
+.place {
+  font-size: 13px;
+  line-height: 15px;
+  color: var(--secondary);
+}
+
+.time {
+  margin-top: 4px;
+  font-size: 17px;
+  line-height: 20px;
+}
+
+/* Add to Calendar */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px 8px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none;
+  transition: filter 150ms ease;
+}
+
+.button img { display: block; }
+
+.button:hover { filter: brightness(1.08); }
+.button:active { filter: brightness(0.92); }
+
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---- Entrance ----------------------------------------------------------- */
+/* The icons dissolve in first, right to left; then the rest of the page. */
+@keyframes dissolve {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.96);
+  }
+}
+
+.graphic img,
+.header,
+.footer {
+  animation: dissolve 900ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.graphic img:nth-child(3) { animation-delay: 100ms; }
+.graphic img:nth-child(2) { animation-delay: 280ms; }
+.graphic img:nth-child(1) { animation-delay: 460ms; }
+
+.header,
+.footer {
+  animation-name: dissolve-text;
+  animation-duration: 1100ms;
+  animation-delay: 1000ms;
+}
+
+@keyframes dissolve-text {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graphic img,
+  .header,
+  .footer {
+    animation-name: fade;
+    animation-duration: 400ms;
+    animation-delay: 0ms;
+  }
+
+  @keyframes fade {
+    from { opacity: 0; }
+  }
+}
+
+/* ---- Wider screens: the design's spacing ------------------------------- */
+@media (min-width: 640px) {
+  .column { padding-block: 64px; }
+}
