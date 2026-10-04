@@ -184,6 +184,38 @@ html {
   outline-offset: 3px;
 }
 
+/* ---- Broadcast ---------------------------------------------------------- */
+/* At showtime the teaser gives way to the video alone, centered in the
+   window and as large as fits at 16:9. */
+.broadcast { display: none; }
+
+.live .column { display: none; }
+
+.live .broadcast {
+  --gutter: 16px;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--gutter);
+}
+
+.player {
+  width: min(100%, calc((100dvh - 2 * var(--gutter)) * 16 / 9));
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: 0 0 0 1px var(--tile-edge);
+}
+
+.player iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* ---- Entrance ----------------------------------------------------------- */
 /* The icons dissolve in first, left to right; then the text; then the
    Add to Calendar button. */
@@ -198,7 +230,8 @@ html {
 .graphic img,
 .header,
 .dates,
-.button {
+.button,
+.player {
   animation: dissolve 900ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
 
@@ -227,7 +260,8 @@ html {
   .graphic img,
   .header,
   .dates,
-  .button {
+  .button,
+  .player {
     animation-name: fade;
     animation-duration: 400ms;
     animation-delay: 0ms;
@@ -238,7 +272,65 @@ html {
   }
 }
 
+/* ---- Showtime ----------------------------------------------------------- */
+/* The entrance in reverse: the button and text dissolve out, then the
+   icons right to left, then the video dissolves in (see .player above).
+   .settled holds the teaser at rest for visitors arriving after showtime. */
+.settled .graphic img,
+.settled .header,
+.settled .dates,
+.settled .button {
+  animation: none;
+}
+
+@keyframes dissolve-out {
+  to {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.96);
+  }
+}
+
+@keyframes dissolve-text-out {
+  to {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+.leaving .graphic img {
+  animation: dissolve-out 900ms cubic-bezier(0.8, 0, 0.8, 0.3) both;
+}
+
+.leaving .graphic img:nth-child(3) { animation-delay: 1440ms; }
+.leaving .graphic img:nth-child(2) { animation-delay: 1620ms; }
+.leaving .graphic img:nth-child(1) { animation-delay: 1800ms; }
+
+.leaving .header,
+.leaving .dates,
+.leaving .button {
+  animation: dissolve-text-out 1100ms cubic-bezier(0.8, 0, 0.8, 0.3) both;
+}
+
+.leaving .header,
+.leaving .dates { animation-delay: 700ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .leaving .graphic img:nth-child(n),
+  .leaving .header,
+  .leaving .dates,
+  .leaving .button {
+    animation: fade-out 400ms both;
+  }
+
+  @keyframes fade-out {
+    to { opacity: 0; }
+  }
+}
+
 /* ---- Wider screens: the design's spacing ------------------------------- */
 @media (min-width: 640px) {
   .column { padding-block: 64px; }
+  .live .broadcast { --gutter: 48px; }
+  .player { border-radius: 24px; }
 }
