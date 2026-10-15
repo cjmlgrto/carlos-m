@@ -54,7 +54,12 @@ html, body {
    --art, so one image recolours itself for light and dark mode. */
 #art {
   position: fixed;
-  inset: 8vh 8vw;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  /* Scales with the viewport but never grows past ~640px tall. */
+  width: min(84vw, 380px);
+  height: min(84vh, 640px);
   background-color: var(--art);
   -webkit-mask: url(handaxe.png) center / contain no-repeat;
           mask: url(handaxe.png) center / contain no-repeat;
