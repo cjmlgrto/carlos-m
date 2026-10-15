@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <style>
+    path { fill: #1a1a1a; }
+    @media (prefers-color-scheme: dark) { path { fill: #f4f4f4; } }
+  </style>
+  <!-- Hand axe with one knapped ridge. Same shape as mask-icon.svg. -->
+  <path fill-rule="evenodd" d="M3.00 11.90 4.00 13.70 5.70 14.90 8.00 15.30 10.20 14.90 12.00 13.60 12.90 11.60 13.00 9.30 12.20 7.60 11.70 5.60 10.60 3.90 9.70 2.30 8.30 0.80 6.90 1.60 5.90 3.60 4.60 5.40 3.80 7.40 3.48 8.41 7.24 6.09 7.91 1.92 8.89 2.08 8.16 6.71 3.09 9.82Z"/>
+</svg>
