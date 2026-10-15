@@ -17,6 +17,7 @@
   --bg: #f4f4f4;   /* page background */
   --fg: #1a1a1a;   /* revealed text */
   --dim: #c9c9c9;  /* the random noise characters */
+  --art: #dedede;  /* the faint hand-axe drawing behind the text */
 }
 
 /* Dark mode — follows the OS setting. */
@@ -25,6 +26,7 @@
     --bg: #0d0d0d;
     --fg: #f4f4f4;
     --dim: #3a3a3a;
+    --art: #242424;
   }
 }
 
@@ -47,6 +49,20 @@ html, body {
   user-select: none;
   cursor: default;
 }
+
+/* Background drawing: a transparent line mask (handaxe.png) filled with
+   --art, so one image recolours itself for light and dark mode. */
+#art {
+  position: fixed;
+  inset: 8vh 8vw;
+  background-color: var(--art);
+  -webkit-mask: url(handaxe.png) center / contain no-repeat;
+          mask: url(handaxe.png) center / contain no-repeat;
+  opacity: 0;
+  animation: art-in 2600ms ease-out 300ms forwards;
+  pointer-events: none;
+}
+@keyframes art-in { to { opacity: 1; } }
 
 .row { white-space: pre; }
 
@@ -73,4 +89,5 @@ html, body {
 /* Respect users who don't want motion: skip the noise, just show the text. */
 @media (prefers-reduced-motion: reduce) {
   .cell { transition: none; }
+  #art { animation: none; opacity: 1; }
 }
