@@ -14,9 +14,9 @@
   const BLOCKS = [
     { lines: ["CARLOS MELEGRITO"], anchor: true },      // the name — pinned top-left
     { lines: ["IS A HUMAN INTERFACE DESIGNER", "AT APPLE"] },
-    { lines: ["MAKING SOFTWARE"] },
+    { lines: ["MAKING TOOLS"] },
     { lines: ["FOR PEOPLE"] },
-    { lines: ["WHO MAKE SOFTWARE"] },
+    { lines: ["WHO MAKE"] },
   ];
 
   /* Characters the noise field cycles through. */
