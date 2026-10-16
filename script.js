@@ -16,7 +16,7 @@
     { lines: ["IS A HUMAN INTERFACE DESIGNER", "AT APPLE"] },
     { lines: ["MAKING TOOLS"] },
     { lines: ["FOR PEOPLE"] },
-    { lines: ["WHO MAKE"] },
+    { lines: ["WHO MAKE THINGS"] },
   ];
 
   /* Characters the noise field cycles through. */
