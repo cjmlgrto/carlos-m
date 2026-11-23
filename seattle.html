@@ -77,6 +77,10 @@ h4{font-size:15px;font-weight:600;color:var(--secondary);margin-top:28px;padding
 .map,.thumb{color-scheme:light}
 .map .ref-d{fill:#1d1d1f;font-weight:700}
 .map .wat{fill:var(--water)}
+.obtn{position:absolute;right:10px;bottom:10px;z-index:2;display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 14px;border-radius:999px;border:.5px solid rgba(0,0,0,.12);background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);box-shadow:0 1px 3px rgba(0,0,0,.08);color:#007aff;font:600 13px var(--font);text-decoration:none}
+.obtn:hover{text-decoration:none;background:rgba(255,255,255,.85)}
+.obtn svg{position:static;inset:auto;display:block;width:9px;height:9px;fill:currentColor}
+.obtn:focus-visible{outline:2px solid #007aff;outline-offset:2px}
 .map .hwy{fill:none;stroke:#b4b7b9;stroke-linejoin:round;stroke-linecap:round}
 .map .hwy-c{fill:none;stroke:#fff;stroke-linejoin:round;stroke-linecap:round}
 .map .sh-b{fill:#2f5fb3;stroke:#fff}
@@ -94,10 +98,6 @@ h4{font-size:15px;font-weight:600;color:var(--secondary);margin-top:28px;padding
 .map .needle path:nth-child(2){fill:#2d3440}
 .map .needle-t{fill:#6e6e73;font-weight:600;letter-spacing:.04em}
 
-.zbtn{position:absolute;right:10px;bottom:10px;z-index:2;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0;border:.5px solid rgba(0,0,0,.12);background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);box-shadow:0 1px 3px rgba(0,0,0,.08);color:#3c3c43;cursor:pointer}
-.zbtn svg{position:static;inset:auto;display:block;width:22px;height:22px;fill:currentColor}
-.zbtn[aria-pressed=true]{color:#007aff}
-.zbtn:focus-visible{outline:2px solid #007aff;outline-offset:2px}
 .map .pin circle,.thumb .pin circle{stroke:#fff}
 .map .pin text{fill:#fff;font-family:var(--font);font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none}
 .map a:hover .pin,.map a:focus-visible .pin{opacity:.85}
@@ -348,7 +348,7 @@ document.querySelectorAll('.map').forEach(el=>{
   const inB=(x,y,w,h)=>x>vx+4*u&&x+w<vx+vw-4*u&&y>vy+4*u&&y+h<vy+vh-4*u;
   pos.forEach(([x,y])=>occ.push([x-14*u,y-14*u,28*u,28*u]));
   refs.forEach(r=>{const [x,y]=prj(r.ll);occ.push([x-14*u,y-14*u,28*u,28*u])});
-  occ.push([vx+vw-58*u,vy+vh-58*u,58*u,58*u]);
+  occ.push([vx+vw-140*u,vy+vh-50*u,140*u,50*u]);
   const tw=(t,fs,k=.6)=>t.length*fs*k*u;
   const put=(t,x,y,fs,cls,k=.6,extra=0)=>{const w=tw(t,fs,k)+extra,h=fs*1.25*u;const bx=x-w/2,by=y-h/2;if(!inB(bx,by,w,h)||!free(bx,by,w,h))return '';occ.push([bx,by,w,h]);return `<text class="${cls}" x="${x}" y="${y}" font-size="${fs*u}" stroke-width="${3*u}">${t}</text>`};
   let base='';
@@ -369,7 +369,7 @@ document.querySelectorAll('.map').forEach(el=>{
   const placed=[];
   const hit=(x,y,w,h)=>placed.some(([a,b,c,d])=>x<a+c&&x+w>a&&y<b+d&&y+h>b);
   const refPin=(x,y,r)=>`<g filter="url(#sh)"><circle cx="${x}" cy="${y}" r="${12*u}" fill="${r.c}" stroke="#fff" stroke-width="${2*u}"/></g><use href="#i-${r.ic}" x="${x-7*u}" y="${y-7*u}" width="${14*u}" height="${14*u}" fill="#fff"/>`;
-  const taken=[[vx+vw-56*u,vy+vh-56*u]];
+  const taken=[[vx+vw-40*u,vy+vh-28*u],[vx+vw-80*u,vy+vh-28*u],[vx+vw-120*u,vy+vh-28*u]];
   const freeR=(x,y)=>!taken.some(([a,b])=>Math.hypot(a-x,b-y)<34*u);
   let offSvg='';
   const refSvg=refs.map(r=>{
@@ -386,8 +386,7 @@ document.querySelectorAll('.map').forEach(el=>{
     return '';
   }).join('');
   const pins=leads+refSvg+pts.map((p,i)=>{const [x,y]=pos[i];return `<a href="${mapUrl(p)}" aria-label="${esc(p.n)}"><title>${esc(p.n)}</title>${wide?`<circle cx="${x}" cy="${y}" r="${5*u}" fill="${cols[key]}" stroke="#fff" stroke-width="${1.5*u}"/>`:pin(x,y,u,cols[key],p.ic)}</a>`}).join('');
-  el.innerHTML=`<svg viewBox="${vx} ${vy} ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg"><rect x="${vx}" y="${vy}" width="${vw}" height="${vh}" class="land"/><use href="#water" class="wat"/><rect x="0" y="0" width="943" height="1200" class="wat"/><use href="#land" class="land"/><use href="#parks" class="park"/>${base}${lab}${pins}${offSvg}</svg><button class="zbtn" type="button" aria-pressed="${wide}" aria-label="${wide?'Zoom back in':'Show airport, station and city center'}" title="${wide?'Zoom back in':'Show airport, station and city center'}"><svg viewBox="1.83 1.83 29.12 26.84" aria-hidden="true"><use href="#i-locate" x="0" y="0" width="32.7812" height="30.4844"/></svg></button>`;
-  el.querySelector('.zbtn').onclick=()=>{el.dataset.z=wide?'in':'out';draw()};
+  el.innerHTML=`<svg viewBox="${vx} ${vy} ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg"><rect x="${vx}" y="${vy}" width="${vw}" height="${vh}" class="land"/><use href="#water" class="wat"/><rect x="0" y="0" width="943" height="1200" class="wat"/><use href="#land" class="land"/><use href="#parks" class="park"/>${base}${lab}${pins}${offSvg}</svg><a class="obtn" target="_blank" rel="noopener" href="https://maps.apple.com/?ll=${ctr[0].toFixed(5)},${ctr[1].toFixed(5)}&spn=${(vh/1e4).toFixed(4)},${(vw/(K*1e4)).toFixed(4)}">Open in Maps<svg aria-hidden="true"><use href="#i-ext"/></svg></a>`;
  };
  const ro=new ResizeObserver(draw);ro.observe(el);
 });
