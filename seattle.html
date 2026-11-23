@@ -263,6 +263,7 @@ const P={
  oriental:{n:'Oriental Mart',k:'Filipino lunch',a:'1506 Pike Pl',ll:[47.6088,-122.3407],h:'Daily 11–3',u:'https://pikeplacemarket.org/vendor/oriental-mart/'},
  hellenika:{n:'Hellenika Cultured Creamery',k:'Gelato',ll:[47.6092,-122.3412],q:'Hellenika Cultured Creamery, Pike Place Market, Seattle, WA',h:'Daily about 10:30–6',u:'https://www.hellenika.us'},
  ono:{n:'Ono Authentic Hawaiian Poke',k:'Poke',ll:[47.6095,-122.3418],q:'Ono Authentic Hawaiian Poke, Pike Place Market, Seattle, WA',h:'Mon–Sat 11–7, Sun 11–5',u:'https://www.eatonopoke.com'},
+ kedai:{n:'Kedai Makan',k:'Malaysian',a:'2234 1st Ave',ll:[47.6131,-122.3455],h:'Mon–Thu 11–9; check other days',u:'https://www.kedaimakansea.com',x:'Abby’s pick. Two blocks from the Airbnb. Takes reservations.'},
  golmok:{n:'Golmok Market Bar',k:'Korean',a:'706 E Pike St',ll:[47.6141,-122.3226],h:'Wed, Thu, Sun 4–10; Fri, Sat 4–12',u:'https://www.golmokseattle.com'},
  unicorn:{n:'Unicorn',k:'Carnival bar, 21+',a:'1118 E Pike St',ll:[47.6142,-122.3170],h:'Nightly',u:'https://www.unicornseattle.com'},
  ladive:{n:'La Dive',k:'Natural wine',a:'721 E Pike St',ll:[47.6137,-122.3220],h:'Daily from 3, weekends from noon',u:'https://www.ladiveseattle.com'},
@@ -289,7 +290,7 @@ for(const k in P)P[k].ic='fork';
 ['aquarium'].forEach(k=>P[k].ic='art');
 const CLOSED=new Set(['spinasse', 'canon', 'pinkdoor', 'piroshky', 'crumpet', 'oriental', 'hellenika', 'ono']);
 const groups=[
- ['Capitol Hill, Downtown and Pike Place','Close to the stays, from Pike Place to Pioneer Square.','eatS',['aquarium','spinasse','canon','golmok','unicorn','ladive','pinkdoor','piroshky','crumpet','oriental','hellenika','ono','lepichet','cobbs','pst','narrative','postalley','daymade','tanhuo']],
+ ['Capitol Hill, Downtown and Pike Place','Close to the stays, from Pike Place to Pioneer Square.','eatS',['aquarium','spinasse','canon','golmok','unicorn','ladive','pinkdoor','piroshky','crumpet','oriental','hellenika','ono','lepichet','kedai','cobbs','pst','narrative','postalley','daymade','tanhuo']],
  ['Ballard, Fremont and North','North of Lake Union. Plan a day up here.','eatN',['fremontmkt','gasworks','goodmart','situ','backyard','seawolf','localtide','kamonegi','steakeasy','bunbun']]
 ];
 const MUST={piroshky:'Pike Place morning',oriental:'Pike Place morning',lepichet:'Pike Place morning',localtide:'Fremont and Ballard day',situ:'Fremont and Ballard day',steakeasy:'Fremont and Ballard day, go early',tanhuo:'Late night'};
@@ -308,10 +309,11 @@ $('food').innerHTML=groups.map(([t,sub,mk,ks])=>`<h3>${esc(t)}</h3><p class="int
 /* Do */
 const todo=[
  {n:'Ferry to Bainbridge Island',k:'Half day',h:'Museum and shops',ll:[47.6025,-122.3385],q:'Seattle Ferry Terminal, Colman Dock, Seattle, WA',u:'https://wsdot.wa.gov/travel/washington-state-ferries',l:'Schedule'},
+ {n:'Chihuly Garden and Glass',k:'Hours vary by day',h:'Abby’s pick. Next to the Space Needle. Tickets about $40–45. Monorail from Westlake.',a:'305 Harrison St',ll:[47.6205,-122.3504],u:'https://chihulygardenandglass.com',l:'Website'},
  {n:'Seattle Art Museum',k:'Any day',h:'Near Pike Place',a:'1300 1st Ave',ll:[47.6073,-122.3381],u:'https://www.seattleartmuseum.org',l:'Website'},
  {n:'Pike Place holiday lighting',k:'Sat, Nov 28, 5 p.m.',h:'',q:'Pike Place Market, Seattle, WA',ll:[47.6097,-122.3417],u:'https://www.pikeplacemarket.org',l:'Website'}
 ];
-todo.forEach((t,i)=>t.no=i+1);todo[0].ic='tree';todo[1].ic='art';todo[2].ic='star';
+todo.forEach((t,i)=>t.no=i+1);todo[0].ic='tree';todo[1].ic='art';todo[2].ic='art';todo[3].ic='star';
 $('todo').innerHTML=todo.map(t=>`<li>${thumb(t,'var(--do)')}<span class="name">${esc(t.n)}</span><span class="sub">${ico('clock')}${esc(t.k)}</span>${t.h?`<span class="sub">${esc(t.h)}</span>`:''}<span class="links"><a href="${t.u}">${t.l}</a><a href="${mapUrl(t)}">Maps</a></span></li>`).join('');
 
 /* Maps */
