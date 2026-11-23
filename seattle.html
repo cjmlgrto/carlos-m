@@ -309,7 +309,8 @@ todo.forEach((t,i)=>t.no=i+1);todo[0].ic='tree';todo[1].ic='art';todo[2].ic='sta
 $('todo').innerHTML=todo.map(t=>`<li>${thumb(t,'var(--do)')}<span class="name">${esc(t.n)}</span><span class="sub">${ico('clock')}${esc(t.k)}</span>${t.h?`<span class="sub">${esc(t.h)}</span>`:''}<span class="links"><a href="${t.u}">${t.l}</a><a href="${mapUrl(t)}">Maps</a></span></li>`).join('');
 
 /* Maps */
-const fp=Object.values(P).filter(p=>p.ll);const sets={stay:stays,eatS:groups[0][3].map(k=>P[k]),eatN:groups[1][3].map(k=>P[k]),do:todo};
+const fp=Object.values(P).filter(p=>p.ll);stays.forEach(x=>x.col='var(--stay)');Object.values(P).forEach(x=>x.col='var(--eat)');todo.forEach(x=>x.col='var(--do)');
+const sets={all:[...stays,...['piroshky','spinasse','ladive','tanhuo','localtide','situ','steakeasy','seawolf','gasworks','kamonegi','backyard','pinkdoor'].map(k=>P[k]),todo[0],todo[1]],stay:stays,eatS:groups[0][3].map(k=>P[k]),eatN:groups[1][3].map(k=>P[k]),do:todo};
 const HOODS=[['Ballard',47.6690,-122.3840],['Fremont',47.6530,-122.3520],['Wallingford',47.6615,-122.3340],['University District',47.6625,-122.3125],['Magnolia',47.6500,-122.4000],['Interbay',47.6460,-122.3790],['Queen Anne',47.6370,-122.3575],['Lower Queen Anne',47.6245,-122.3560],['Westlake',47.6400,-122.3440],['Eastlake',47.6430,-122.3265],['Montlake',47.6405,-122.3045],['South Lake Union',47.6255,-122.3375],['Capitol Hill',47.6255,-122.3140],['Belltown',47.6145,-122.3465],['Downtown',47.6055,-122.3350],['First Hill',47.6085,-122.3235],['Central District',47.6085,-122.3010],['Madrona',47.6125,-122.2885],['Pioneer Square',47.6005,-122.3320],['International District',47.5975,-122.3235],['SODO',47.5830,-122.3345]];
 const WATERS=[['Elliott Bay',47.6030,-122.3620,13],['Lake Union',47.6380,-122.3378,12],['Portage Bay',47.6478,-122.3125,10],['Union Bay',47.6535,-122.2900,11],['Lake Washington',47.6150,-122.2700,14],['Salmon Bay',47.6625,-122.3920,10],['Puget Sound',47.6250,-122.4250,14]];
 const PARKS=[['Discovery Park',47.6573,-122.4058],['Volunteer Park',47.6300,-122.3150],['Interlaken Park',47.6372,-122.3085],['Washington Park Arboretum',47.6395,-122.2945],['Cal Anderson Park',47.6172,-122.3195],['Kerry Park',47.6295,-122.3599],['Myrtle Edwards Park',47.6195,-122.3600],['Madrona Park',47.6125,-122.2780]];
@@ -323,7 +324,7 @@ const HWY=[
 ];
 const refs=[{n:'King Street Station',ic:'train',c:'#007aff',ll:[47.5983,-122.3297],q:'King Street Station, Seattle, WA'},{n:'City center',ic:'star',c:'#30b0c7',ll:[47.6115,-122.3375],q:'Westlake Center, Seattle, WA'},{n:'SEA Airport',ic:'plane',c:'#5856d6',ll:[47.4502,-122.3088],q:'Seattle-Tacoma International Airport'}];
 const miles=(a,b)=>{const R=3958.8,r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r;const h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
-const cols={stay:'var(--stay)',eatS:'var(--eat)',eatN:'var(--eat)',do:'var(--do)'};
+const cols={all:null,stay:'var(--stay)',eatS:'var(--eat)',eatN:'var(--eat)',do:'var(--do)'};
 document.querySelectorAll('.map').forEach(el=>{
  const key=el.dataset.set,pts=sets[key];
  const xy=pts.map(p=>prj(p.ll));
@@ -334,16 +335,17 @@ document.querySelectorAll('.map').forEach(el=>{
   let x0=Math.min(...fit.map(p=>p[0])),x1=Math.max(...fit.map(p=>p[0])),y0=Math.min(...fit.map(p=>p[1])),y1=Math.max(...fit.map(p=>p[1]));
   const minSpan=key==='eatS'||key==='eatN'?160:320;
   let cx=(x0+x1)/2,cy=(y0+y1)/2,sw=Math.max(x1-x0,minSpan),sh=Math.max(y1-y0,minSpan);
-  const pad=40,s=Math.min((W-pad*2)/sw,(H-pad*2)/sh);
+  let pad=40,s=Math.min((W-pad*2)/sw,(H-pad*2)/sh);
+  if(el.dataset.view){const v=el.dataset.view.split(',').map(Number),c=prj([v[0],v[1]]);cx=c[0];cy=c[1];s=W/v[2]}
   const vw=W/s,vh=H/s,vx=cx-vw/2,vy=cy-vh/2,u=1/s;
   const inV=(x,y,m)=>x>vx+m*u&&x<vx+vw-m*u&&y>vy+10*u&&y<vy+vh-8*u;
   const T=(cls,x,y,n,fs,anc='middle')=>`<text class="${cls}" x="${x}" y="${y}" text-anchor="${anc}" font-size="${fs*u}" stroke-width="${3*u}">${n}</text>`;
   const line=pts=>pts.map((p,i)=>{const [x,y]=prj(p);return (i?'L':'M')+x+' '+y}).join('');
   const pos=xy.map(p=>[p[0],p[1]]),gap=26*u;
-  if(!wide)for(let it=0;it<80;it++)for(let a=0;a<pos.length;a++)for(let b=a+1;b<pos.length;b++){
+  if(!wide&&!el.dataset.norelax)for(let it=0;it<80;it++)for(let a=0;a<pos.length;a++)for(let b=a+1;b<pos.length;b++){
    let dx=pos[b][0]-pos[a][0],dy=pos[b][1]-pos[a][1],d=Math.hypot(dx,dy);
    if(d<gap){if(d<1e-6){dx=Math.cos(a+b);dy=Math.sin(a+b);d=1}const m=(gap-d)/2/d;pos[a][0]-=dx*m;pos[a][1]-=dy*m;pos[b][0]+=dx*m;pos[b][1]+=dy*m}}
-  const leads=pos.map((q,i)=>Math.hypot(q[0]-xy[i][0],q[1]-xy[i][1])>4*u?`<line class="lead" x1="${xy[i][0]}" y1="${xy[i][1]}" x2="${q[0]}" y2="${q[1]}" stroke-width="${1*u}"/><circle cx="${xy[i][0]}" cy="${xy[i][1]}" r="${2*u}" fill="${cols[key]}"/>`:'').join('');
+  const leads=pos.map((q,i)=>Math.hypot(q[0]-xy[i][0],q[1]-xy[i][1])>4*u?`<line class="lead" x1="${xy[i][0]}" y1="${xy[i][1]}" x2="${q[0]}" y2="${q[1]}" stroke-width="${1*u}"/><circle cx="${xy[i][0]}" cy="${xy[i][1]}" r="${2*u}" fill="${pts[i].col||cols[key]}"/>`:'').join('');
   const occ=[];const free=(x,y,w,h)=>!occ.some(([a,b,c,d])=>x<a+c&&x+w>a&&y<b+d&&y+h>b);
   const inB=(x,y,w,h)=>x>vx+4*u&&x+w<vx+vw-4*u&&y>vy+4*u&&y+h<vy+vh-4*u;
   pos.forEach(([x,y])=>occ.push([x-14*u,y-14*u,28*u,28*u]));
@@ -385,7 +387,7 @@ document.querySelectorAll('.map').forEach(el=>{
     offSvg+=`<a href="${href}" aria-label="${esc(r.n)}, ${mi} miles"><title>${esc(r.n)}, ${mi} mi</title><path d="M${ax+4*u} ${ay}L${ax-3*u} ${ay-4.5*u}L${ax-3*u} ${ay+4.5*u}Z" fill="${r.c}" transform="rotate(${deg} ${ax} ${ay})"/>${refPin(ex,ey,r)}${T('ref-d',ex,ey-19*u,mi+' mi',10)}</a>`;
     return '';
   }).join('');
-  const pins=leads+refSvg+pts.map((p,i)=>{const [x,y]=pos[i];return `<a href="${mapUrl(p)}" aria-label="${esc(p.n)}"><title>${esc(p.n)}</title>${wide?`<circle cx="${x}" cy="${y}" r="${5*u}" fill="${cols[key]}" stroke="#fff" stroke-width="${1.5*u}"/>`:pin(x,y,u,cols[key],p.ic)}</a>`}).join('');
+  const pins=leads+refSvg+pts.map((p,i)=>{const [x,y]=pos[i];return `<a href="${mapUrl(p)}" aria-label="${esc(p.n)}"><title>${esc(p.n)}</title>${wide?`<circle cx="${x}" cy="${y}" r="${5*u}" fill="${p.col||cols[key]}" stroke="#fff" stroke-width="${1.5*u}"/>`:pin(x,y,u,p.col||cols[key],p.ic)}</a>`}).join('');
   el.innerHTML=`<svg viewBox="${vx} ${vy} ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg"><rect x="${vx}" y="${vy}" width="${vw}" height="${vh}" class="land"/><use href="#water" class="wat"/><rect x="0" y="0" width="943" height="1200" class="wat"/><use href="#land" class="land"/><use href="#parks" class="park"/>${base}${lab}${pins}${offSvg}</svg><a class="obtn" target="_blank" rel="noopener" href="https://maps.apple.com/?ll=${ctr[0].toFixed(5)},${ctr[1].toFixed(5)}&spn=${(vh/1e4).toFixed(4)},${(vw/(K*1e4)).toFixed(4)}">Open in Maps<svg aria-hidden="true"><use href="#i-ext"/></svg></a>`;
  };
  const ro=new ResizeObserver(draw);ro.observe(el);
