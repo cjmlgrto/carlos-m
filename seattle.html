@@ -245,8 +245,8 @@ $('stays').innerHTML=stays.map(s=>`<article class="stay booked">
  <div class="meta">${ico('house')}${esc(s.addr)}</div>
  <div class="meta specs"><span aria-label="${s.rooms[0]} bedrooms">${ico('plan')}${s.rooms[0]}</span><span aria-label="${s.rooms[1]} beds">${ico('bed')}${s.rooms[1]}</span><span aria-label="${s.rooms[2]} baths">${ico('bath')}${s.rooms[2]}</span></div>
  <div class="line">Free garage parking, pool and sauna</div>
- <h4 class="gt">Getting there from the airport</h4>
- <ul class="steps"><li>Link light rail to Westlake Station, then a 10 minute walk</li><li>Taxi, Uber or Lyft, about $35</li></ul>
+ <h4 class="gt">Getting there from King Street Station</h4>
+ <ul class="steps"><li>Walk next door to Chinatown–ID Station and take the 1 Line light rail north 3 stops to Westlake, then walk about 10 minutes</li><li>Uber, Lyft or taxi, about 10 minutes (under 2 miles)</li><li>Walk, about 40 minutes along 1st Ave</li></ul>
  <p class="stay-links">${INVITE?`<a href="${INVITE}">Join the trip on Airbnb</a>`:''}<a href="${s.url}">Listing</a><a href="${mapUrl(s)}">Maps</a></p>
 </article>`).join('');
 
