@@ -196,6 +196,9 @@ footer.column{padding:48px 20px 64px;font-size:13px;color:var(--secondary)}
     <h2>Do</h2>
     <div class="map" data-set="do" role="img" aria-label="Map of activities"></div>
     <ul class="rows" id="todo" style="margin-top:16px;border-top:1px solid var(--divider)"></ul>
+    <h3>Day trips</h3>
+    <p class="intro">Outside the city. You’ll need a car.</p>
+    <ul class="rows" id="trips" style="margin-top:16px;border-top:1px solid var(--divider)"></ul>
   </section>
 </main>
 
@@ -282,6 +285,12 @@ const P={
  indigo:{n:'Indigo Cow',k:'Soft serve',a:'1911 N 45th St',ll:[47.6614,-122.3356],u:'https://indigocow.com',x:'Hokkaido-milk soft serve with chocolate shell. From @seattle.grub.'},
  fram:{n:'Fram',k:'Café on Lake Union',a:'2950 Fairview Ave E',ll:[47.6478,-122.3258],h:'Sun, Mon 6–6; Tue–Sat 6–8',u:'https://frambrews.com',x:'From @seattle.grub.'},
  banhmiland:{n:'Banh Mi Land',k:'Banh mi, Lynnwood',q:'Banh Mi Land, 4114 198th St SW, Lynnwood, WA',a:'',h:'',offShort:'Lynnwood',x:'Get the grilled pork. Instagram only. From @seattle.grub.'},
+ saltys:{n:'Salty’s on Alki Beach',k:'Waterfront seafood, West Seattle',a:'1936 Harbor Ave SW',ll:[47.5866,-122.3770],h:'Thanksgiving buffet 11–6 (last seating)',u:'https://saltys.com/thanksgiving/',x:'$125 for ages 16+. Our train gets in at 7:51 p.m. that day, so it’s a stretch.'},
+ chowder:{n:'Pike Place Chowder',k:'Chowder and seafood',a:'1530 Post Alley',ll:[47.6091,-122.3412],h:'Daily 11–5',u:'https://www.pikeplacechowder.com'},
+ altura:{n:'Altura',k:'Italian tasting menu',a:'622 Broadway E',ll:[47.6253,-122.3207],h:'Tue–Sun dinner',u:'https://alturarestaurant.com',x:'Reservations recommended.'},
+ bathtub:{n:'Bathtub Gin & Co.',k:'Gin speakeasy, 21+',a:'2205 2nd Ave',ll:[47.6127,-122.3433],h:'Nightly 5 p.m.–2 a.m.',u:'https://bathtubginseattle.com',x:'Alley entrance.'},
+ zigzag:{n:'Zig Zag Café',k:'Cocktails, 21+',a:'1501 Western Ave',ll:[47.6083,-122.3417],h:'5 p.m.–midnight',u:'https://zigzagseattle.com',x:'On the Pike Street Hill Climb.'},
+ walrus:{n:'The Walrus and the Carpenter',k:'Oyster bar',a:'4743 Ballard Ave NW',ll:[47.6636,-122.3800],h:'Sun–Thu 4–9, Fri–Sat 4–10',u:'https://thewalrusbar.com'},
  goodmart:{n:'GoodMart',k:'Japanese seafood',a:'5130 Ballard Ave NW',ll:[47.6658,-122.3830],h:'Thu–Sun 11–4',u:'https://eatgoodmart.com',ig:'eatgoodmart',x:'From the Local Tide team. Get the soft hambugu, tempura ling cod and black cod. Soft opening, so check Instagram first.'},
  situ:{n:'Lupe’s Situ Tacos',k:'Tacos',a:'5239 Ballard Ave NW',ll:[47.6672,-122.3846],h:'Mon–Thu 11–10, Fri 11–12, Sat 10–12, Sun 10–10',u:'https://www.situtacos.com'},
  backyard:{n:'Backyard Bagel',k:'Bagels',a:'4310 Fremont Ave N',ll:[47.6591,-122.3500],h:'Thu, Fri 7–1; Sat, Sun 8–2; closed Mon–Wed',u:'https://www.eatbackyard.com'},
@@ -297,11 +306,13 @@ for(const k in P)P[k].ic='fork';
 ['gasworks', 'fremontmkt'].forEach(k=>P[k].ic='tree');
 ['aquarium'].forEach(k=>P[k].ic='art');
 ['indigo','legrey','fram'].forEach(k=>P[k].ic='cup');
+['bathtub','zigzag'].forEach(k=>P[k].ic='wine');
+const OPENTG=new Set(['saltys']);
 const CLOSED=new Set(['spinasse', 'canon', 'pinkdoor', 'piroshky', 'crumpet', 'oriental', 'hellenika', 'ono']);
 const groups=[
- ['Capitol Hill, Downtown and Pike Place','Close to the stays, from Pike Place to Pioneer Square.','eatS',['aquarium','spinasse','canon','golmok','unicorn','ladive','pinkdoor','piroshky','crumpet','oriental','hellenika','ono','lepichet','kedai','sead','busan','bemi','legrey','cobbs','pst','narrative','postalley','daymade','tanhuo']],
- ['Ballard, Fremont and North','North of Lake Union. Plan a day up here.','eatN',['fremontmkt','gasworks','goodmart','situ','backyard','seawolf','localtide','kamonegi','steakeasy','bunbun','maqluba','indigo','fram']],
- ['Elsewhere','Worth the drive.',null,['banhmiland']]
+ ['Capitol Hill, Downtown and Pike Place','Close to the stays, from Pike Place to Pioneer Square.','eatS',['aquarium','spinasse','canon','golmok','unicorn','ladive','pinkdoor','piroshky','crumpet','oriental','hellenika','ono','lepichet','kedai','sead','busan','bemi','legrey','chowder','altura','bathtub','zigzag','cobbs','pst','narrative','postalley','daymade','tanhuo']],
+ ['Ballard, Fremont and North','North of Lake Union. Plan a day up here.','eatN',['fremontmkt','gasworks','goodmart','situ','backyard','seawolf','localtide','kamonegi','steakeasy','bunbun','maqluba','indigo','fram','walrus']],
+ ['Elsewhere','Worth the trip.',null,['saltys','banhmiland']]
 ];
 const MEM=new Set(['sead','goodmart']);
 const MUST={sead:'Most memorable meal, @seattle.grub',goodmart:'Most memorable meal, @seattle.grub',piroshky:'Pike Place morning',oriental:'Pike Place morning',lepichet:'Pike Place morning',localtide:'Fremont and Ballard day',situ:'Fremont and Ballard day',steakeasy:'Fremont and Ballard day, go early',tanhuo:'Late night'};
@@ -319,13 +330,25 @@ $('food').innerHTML=groups.map(([t,sub,mk,ks])=>`<h3>${esc(t)}</h3><p class="int
 
 /* Do */
 const todo=[
- {n:'Ferry to Bainbridge Island',k:'Half day',h:'Museum and shops',ll:[47.6025,-122.3385],q:'Seattle Ferry Terminal, Colman Dock, Seattle, WA',u:'https://wsdot.wa.gov/travel/washington-state-ferries',l:'Schedule'},
- {n:'Chihuly Garden and Glass',k:'Hours vary by day',h:'Abby’s pick. Next to the Space Needle. Tickets about $40–45. Monorail from Westlake.',a:'305 Harrison St',ll:[47.6205,-122.3504],u:'https://chihulygardenandglass.com',l:'Website'},
- {n:'Seattle Art Museum',k:'Any day',h:'Near Pike Place',a:'1300 1st Ave',ll:[47.6073,-122.3381],u:'https://www.seattleartmuseum.org',l:'Website'},
- {n:'Pike Place holiday lighting',k:'Sat, Nov 28, 5 p.m.',h:'',q:'Pike Place Market, Seattle, WA',ll:[47.6097,-122.3417],u:'https://www.pikeplacemarket.org',l:'Website'}
+ {n:'Ferry to Bainbridge Island',k:'Half day',h:'Museum and shops',ll:[47.6025,-122.3385],q:'Seattle Ferry Terminal, Colman Dock, Seattle, WA',u:'https://wsdot.wa.gov/travel/washington-state-ferries',l:'Schedule',ic:'tree'},
+ {n:'Chihuly Garden and Glass',k:'Hours vary by day',h:'Abby’s pick. Next to the Space Needle. Tickets about $40–45. Monorail from Westlake.',a:'305 Harrison St',ll:[47.6205,-122.3504],u:'https://chihulygardenandglass.com',l:'Website',ic:'art'},
+ {n:'Seattle Art Museum',k:'Any day',h:'Near Pike Place',a:'1300 1st Ave',ll:[47.6073,-122.3381],u:'https://www.seattleartmuseum.org',l:'Website',ic:'art'},
+ {n:'Pike Place holiday lighting',k:'Sat, Nov 28, 5 p.m.',h:'',q:'Pike Place Market, Seattle, WA',ll:[47.6097,-122.3417],u:'https://www.pikeplacemarket.org',l:'Website',ic:'star'},
+ {n:'Merry Matsuri',k:'Sat, Nov 28, 11–4',h:'Holiday artist market at ichigo alley',a:'1319 4th Ave',ll:[47.6087,-122.3349],u:'https://seattlerestored.org/event/merry-matsuri/',l:'Event',ic:'star'},
+ {n:'Open Mic Night at Folio',k:'Mon, Nov 30, 5–8:30',h:'Local readings and performances',a:'93 Pike St',ll:[47.6086,-122.3405],u:'https://www.folioseattle.org/event-details/open-mic-night-2026-11-30-17-00',l:'Event',ic:'star'},
+ {n:'Seattle Central Library',k:'Any day',h:'Architecture stop. Start on the 10th floor and walk down.',a:'1000 4th Ave',ll:[47.6067,-122.3325],u:'https://www.spl.org/Seattle-Public-Library/documents/locations/cen/self-guided-tours/EN/Adults_Tour_Central_Library%20English.pdf',l:'Self-guided tour',ic:'art'},
+ {n:'Kerry Park',k:'Best at sunset',h:'Skyline viewpoint in Queen Anne',ll:[47.6295,-122.3599],u:'https://seattle.gov/parks/parks/kerry-park',l:'Park info',ic:'tree'},
+ {n:'Discovery Park',k:'Half day',h:'Forest and bluff trails in Magnolia',ll:[47.6573,-122.4058],u:'https://www.seattle.gov/parks/parks/discovery-park',l:'Park info',ic:'tree'}
 ];
-todo.forEach((t,i)=>t.no=i+1);todo[0].ic='tree';todo[1].ic='art';todo[2].ic='art';todo[3].ic='star';
-$('todo').innerHTML=todo.map(t=>`<li>${thumb(t,'var(--do)')}<span class="name">${esc(t.n)}</span><span class="sub">${ico('clock')}${esc(t.k)}</span>${t.h?`<span class="sub">${esc(t.h)}</span>`:''}<span class="links"><a href="${t.u}">${t.l}</a><a href="${mapUrl(t)}">Maps</a></span></li>`).join('');
+const trips=[
+ {n:'Mount Rainier National Park',k:'Full day by car',h:'Hiking or a scenic drive. Check winter road access. Vehicles must carry tire chains.',q:'Mount Rainier National Park, WA',offShort:'Rainier',u:'https://www.nps.gov/mora/planyourvisit/road-status.htm',l:'Road status',ic:'tree'},
+ {n:'Snoqualmie Falls',k:'Half day by car',h:'Waterfall viewpoints east of Seattle',q:'Snoqualmie Falls, WA',offShort:'Snoqualmie',u:'https://wa100.dnr.wa.gov/north-cascades/snoqualmie-falls',l:'Visitor info',ic:'tree'},
+ {n:'Mount Si',k:'Full day by car',h:'Steep hike near North Bend. Discover Pass required for trailhead parking.',q:'Mount Si Trailhead, North Bend, WA',offShort:'North Bend',u:'https://dnr.wa.gov/natural-areas/natural-resources-conservation-areas/mount-si-natural-resources-conservation-area',l:'Trail info',ic:'tree'}
+];
+todo.forEach((t,i)=>t.no=i+1);
+const doRow=t=>`<li>${thumb(t,'var(--do)')}<span class="name">${esc(t.n)}</span><span class="sub">${ico('clock')}${esc(t.k)}</span>${t.h?`<span class="sub">${esc(t.h)}</span>`:''}<span class="links"><a href="${t.u}">${t.l}</a><a href="${mapUrl(t)}">Maps</a></span></li>`;
+$('todo').innerHTML=todo.map(doRow).join('');
+$('trips').innerHTML=trips.map(doRow).join('');
 
 /* Maps */
 const fp=Object.values(P).filter(p=>p.ll);stays.forEach(x=>x.col='var(--stay)');Object.values(P).forEach(x=>x.col='var(--eat)');todo.forEach(x=>x.col='var(--do)');
