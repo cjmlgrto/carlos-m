@@ -16,15 +16,15 @@
 <style>
 /* Styles follow food-spots.com.au: Inter, quiet greys, one narrow centred column, hairline dividers. */
 *{margin:0;padding:0;box-sizing:border-box;min-width:0}
-:root{--bar:rgba(244,244,244,.8);--bg:#F4F4F4;--fg1:#222;--fg2:#666;--fg3:#aaa;--divider:rgba(0,0,0,.08);--width:30rem}
-@media (prefers-color-scheme:dark){:root{--bar:rgba(18,18,18,.8);--bg:#121212;--fg1:#fff;--fg2:#aaa;--fg3:#666;--divider:rgba(255,255,255,.14)}}
+:root{--bg:#F4F4F4;--fg1:#222;--fg2:#666;--fg3:#aaa;--divider:rgba(0,0,0,.08);--width:30rem}
+@media (prefers-color-scheme:dark){:root{--bg:#121212;--fg1:#fff;--fg2:#aaa;--fg3:#666;--divider:rgba(255,255,255,.14)}}
 html{color:var(--fg2);background:var(--bg);-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font:100%/1.5 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;scroll-padding-top:4.5rem}
 a{color:var(--fg2);text-decoration:none}
 a:hover{border-bottom:1px solid var(--fg3)}
 a:focus-visible{outline:2px solid var(--fg3);outline-offset:2px;border-radius:2px}
 body{padding:2rem 0}
 .page-title{max-width:var(--width);padding:0 2rem;margin:2rem auto .5rem;font-size:1.5rem;font-weight:400;letter-spacing:-.03rem;text-align:left;color:var(--fg1)}
-.menu{position:sticky;top:0;z-index:2;background:var(--bar);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);overflow-x:auto;scrollbar-width:none;padding:1rem 0;margin-bottom:2rem;border-bottom:1px solid transparent;transition:border-color .2s}
+.menu{position:sticky;top:0;z-index:2;background:var(--bg);background-clip:padding-box;overflow-x:auto;scrollbar-width:none;padding:1rem 0;margin-bottom:2rem;border-bottom:1px solid transparent;transition:border-color .2s}
 .menu.stuck{border-bottom-color:var(--divider)}
 .menu::-webkit-scrollbar{display:none}
 .menu ul{list-style:none;white-space:nowrap;padding-left:max(2rem,calc(50vw - 15rem + 2rem))}
