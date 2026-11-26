@@ -23,8 +23,7 @@ a{color:var(--fg2);text-decoration:none}
 a:hover{border-bottom:1px solid var(--fg3)}
 a:focus-visible{outline:2px solid var(--fg3);outline-offset:2px;border-radius:2px}
 body{padding:2rem 0}
-.page-title{max-width:var(--width);padding:0 2rem;margin:2rem auto .5rem;font-size:1.5rem;font-weight:400;letter-spacing:-.03rem;text-align:center;color:var(--fg1)}
-.lede{max-width:var(--width);padding:0 2rem;margin:0 auto;text-align:center;font-size:.875rem;color:var(--fg3)}
+.page-title{max-width:var(--width);padding:0 2rem;margin:2rem auto .5rem;font-size:1.5rem;font-weight:400;letter-spacing:-.03rem;text-align:left;color:var(--fg1)}
 .menu{position:sticky;top:0;z-index:2;background:var(--bg);overflow-x:auto;scrollbar-width:none;padding:1rem 0;margin-bottom:2rem}
 .menu::-webkit-scrollbar{display:none}
 .menu ul{list-style:none;white-space:nowrap;padding-left:max(2rem,calc(50vw - 15rem + 2rem))}
@@ -38,19 +37,18 @@ h2{font-size:1rem;font-weight:500;color:var(--fg1);padding-bottom:.5rem;border-b
 .spot{padding:.75rem 0;border-bottom:1px solid var(--divider)}
 .spot:last-child{border-bottom:0}
 h3{font-size:1rem;font-weight:400;color:var(--fg1)}
-.meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;margin-top:.25rem;font-size:.875rem;color:var(--fg3)}
-.links{display:flex;gap:.75rem;margin-left:auto;white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:.25rem 1rem;margin-top:.25rem;font-size:.875rem;color:var(--fg3)}
+.links{display:flex;gap:.75rem;white-space:nowrap}
 .links a{color:var(--fg3)}
 .links a:hover{color:var(--fg2);border-bottom:0}
 .x{width:.55em;height:.55em;fill:currentColor;margin-left:.2em;vertical-align:.05em}
-.colophon{max-width:var(--width);padding:0 2rem;margin:0 auto 4rem;font-size:.875rem;color:var(--fg3);text-align:center}
+.colophon{max-width:var(--width);padding:0 2rem;margin:0 auto 4rem;font-size:.875rem;color:var(--fg3);text-align:left}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-ext" viewBox="0 0 18.2 18.2"><path d="M0.4 17.8C0.9 18.3 1.6 18.3 2.2 17.8L14.2 5.8L16.8 3C17.2 2.6 17.2 1.9 16.8 1.5C16.3 1 15.7 1 15.2 1.5L12.4 4.1L0.4 16.1C-0.1 16.6-0.1 17.3 0.4 17.8ZM15.7 10L15.7 13.6C15.7 14.3 16.2 14.9 16.9 14.9C17.6 14.9 18.2 14.3 18.2 13.6L18.2 1.4C18.2 0.6 17.7 0 16.8 0L4.7 0C3.9 0 3.3 0.6 3.3 1.3C3.3 2 3.9 2.6 4.6 2.6L8.2 2.6L16 2.3Z"/></symbol></svg>
 <header>
   <h1 class="page-title">Melbourne</h1>
-  <p class="lede">120 food spots to try, by area</p>
 </header>
 <nav class="menu" aria-label="Areas"><ul><li><a href="#cbd">CBD</a></li><li><a href="#sb">Southbank</a></li><li><a href="#dk">Docklands</a></li><li><a href="#north">Carlton</a></li><li><a href="#bruns">Brunswick</a></li><li><a href="#fitz">Fitzroy</a></li><li><a href="#rich">Richmond</a></li><li><a href="#south">South Yarra</a></li><li><a href="#west">Footscray</a></li><li><a href="#east">Eastern suburbs</a></li><li><a href="#se">South-east</a></li><li><a href="#pop">Pop-ups</a></li><li><a href="#tbc">Location to check</a></li></ul></nav>
 <main>
