@@ -118,6 +118,7 @@ h4{font-size:15px;font-weight:600;color:var(--secondary);margin-top:28px;padding
 .sub,.note,.closed{grid-column:2;font-size:15px;color:var(--secondary)}
 .closed{color:var(--red)}
 .ic{width:13px;height:13px;fill:currentColor;vertical-align:-1px;margin-right:6px}
+.mkt{grid-column:2;font-size:15px;font-weight:600;color:var(--label)}
 .must{grid-column:2;font-size:15px;font-weight:600;color:light-dark(#c25e00,#ffb340)}
 .stay .line{font-size:15px}
 .stay .meta+.line{margin-top:8px}
@@ -175,16 +176,12 @@ footer.column{padding:48px 20px 64px;font-size:13px;color:var(--secondary)}
 <main class="column">
   <section id="stay">
     <h2>Stay</h2>
-    <p class="intro">Booked. A Belltown condo for 4, a short walk from Pike Place.</p>
     <div class="map" data-set="stay" role="img" aria-label="Map of the Airbnb"></div>
     <ul class="rows" id="stays" style="margin-top:16px;border-top:1px solid var(--divider)"></ul>
-    <h3>Getting there from King Street Station</h3>
-    <ol class="steps"><li>Walk next door to Chinatown–ID Station and take the 1 Line light rail north 3 stops to Westlake, then walk about 10 minutes</li><li>Uber, Lyft or taxi, about 10 minutes (under 2 miles)</li><li>Walk, about 40 minutes along 1st Ave</li></ol>
   </section>
 
   <section id="eat">
     <h2>Eat</h2>
-    <p class="intro">Grouped by area. Starred places first. Tap a pin to open it in Maps.</p>
     <div id="food"></div>
     <p class="cap">Hours can change around the holiday.</p>
   </section>
@@ -194,7 +191,6 @@ footer.column{padding:48px 20px 64px;font-size:13px;color:var(--secondary)}
     <div class="map" data-set="do" role="img" aria-label="Map of activities"></div>
     <ul class="rows" id="todo" style="margin-top:16px;border-top:1px solid var(--divider)"></ul>
     <h3>Day trips</h3>
-    <p class="intro">Outside the city. You’ll need a car.</p>
     <ul class="rows" id="trips" style="margin-top:16px;border-top:1px solid var(--divider)"></ul>
   </section>
 </main>
@@ -310,18 +306,19 @@ const groups=[
  ['Elsewhere','Worth the trip.',null,['saltys','banhmiland']]
 ];
 const MEM=new Set(['sead','goodmart']);
-const MUST={sead:'Most memorable meal, @seattle.grub',goodmart:'Most memorable meal, @seattle.grub',piroshky:'Pike Place morning',oriental:'Pike Place morning',lepichet:'Pike Place morning',localtide:'Fremont and Ballard day',situ:'Fremont and Ballard day',steakeasy:'Fremont and Ballard day, go early',tanhuo:'Late night'};
+const MARKET=new Set(['piroshky','oriental','crumpet','hellenika','ono','chowder','pinkdoor']);
+const MUST={sead:'Most memorable meal, @seattle.grub',goodmart:'Most memorable meal, @seattle.grub',piroshky:'Pike Place Market',oriental:'Pike Place Market',lepichet:'Across from Pike Place Market',localtide:'Fremont and Ballard day',situ:'Fremont and Ballard day',steakeasy:'Fremont and Ballard day, go early',tanhuo:'Late night'};
 groups.forEach(g=>{g[3]=[...g[3].filter(k=>MEM.has(k)),...g[3].filter(k=>MUST[k]&&!MEM.has(k)),...g[3].filter(k=>!MUST[k])]});
 let no=0;groups.forEach(g=>g[3].forEach(k=>{if(P[k].ll)P[k].no=++no}));
 const row=(p,k)=>`<li>${thumb(p,'var(--eat)')}
  <span class="name">${esc(p.n)}</span>
- ${MUST[k]?`<span class="must">${ico('star')}${esc(MUST[k])}</span>`:''}
+ ${MUST[k]?`<span class="must">${ico('star')}${esc(MUST[k])}</span>`:''}${MARKET.has(k)&&MUST[k]!=='Pike Place Market'?`<span class="mkt">${ico('poi')}Pike Place Market</span>`:''}
  ${p.k?`<span class="sub">${esc(p.k)}</span>`:''}
  ${p.h?`<span class="sub">${ico('clock')}${esc(p.h)}</span>`:''}
  ${CLOSED.has(k)?`<span class="closed">${ico('alert')}Closed Thanksgiving</span>`:''}
  ${p.x?`<span class="note">${ico('alert')}${esc(p.x)}</span>`:''}
  <span class="links">${p.u?`<a href="${p.u}">Website</a>`:''}<a href="${mapUrl(p)}">Maps</a>${p.ig?`<a href="https://www.instagram.com/${p.ig}/">Instagram</a>`:''}</span></li>`;
-$('food').innerHTML=groups.map(([t,sub,mk,ks])=>`<h3>${esc(t)}</h3><p class="intro">${esc(sub)}</p>${mk?`<div class="map${mk==='eatS'?' tall':''}" data-set="${mk}" role="img" aria-label="Map of ${esc(t)}"></div>`:''}<ul class="rows" style="margin-top:16px;border-top:1px solid var(--divider)">${ks.map(k=>row(P[k],k)).join('')}</ul>`).join('');
+$('food').innerHTML=groups.map(([t,sub,mk,ks])=>`<h3>${esc(t)}</h3>${mk?`<div class="map${mk==='eatS'?' tall':''}" data-set="${mk}" role="img" aria-label="Map of ${esc(t)}"></div>`:''}<ul class="rows" style="margin-top:16px;border-top:1px solid var(--divider)">${ks.map(k=>row(P[k],k)).join('')}</ul>`).join('');
 
 /* Do */
 const todo=[
