@@ -29,8 +29,11 @@
 --bg:light-dark(#ffffff,#000000);--label:light-dark(#1d1d1f,#f5f5f7);--secondary:light-dark(#6e6e73,#98989d);
 --divider:light-dark(#e4e4e7,#222223);--tile:light-dark(#ffffff,#1c1c1e);--tile-edge:light-dark(rgba(0,0,0,.1),rgba(255,255,255,.12));
 --red:light-dark(#ff383c,#ff4245);--accent:light-dark(#0066cc,#2997ff);--bar:light-dark(rgba(255,255,255,.85),rgba(0,0,0,.8));
---land:#f9f8f4;--park:#c3e0a3;--water:#8cc9f2;--maptext:#5b5b60;
+--land:var(--m-land);--park:var(--m-park);--water:var(--m-water);--maptext:var(--m-maptext);
 --stay:#af52de;--eat:#ff9500;--do:#ff2d55}
+:root{--m-land:#f9f8f4;--m-park:#c3e0a3;--m-water:#8cc9f2;--m-maptext:#5b5b60;--m-halo:#fff;--m-hwy:#b4b7b9;--m-hwyc:#fff;--m-watert:#4f86c6;--m-city:#3a3a3c;--m-parkt:#3f7f45;--m-parkc:#4caf50;--m-needle:#a9c8f7;--m-needlei:#2d3440;--m-needlet:#6e6e73;--m-medge:rgba(0,0,0,.1);--m-btn:rgba(255,255,255,.72);--m-btnh:rgba(255,255,255,.85);--m-btnt:#007aff;--m-shd:.14;--m-refd:#1d1d1f;--m-pinring:#fff}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--m-land:#2b3445;--m-park:#1f4a45;--m-water:#16255c;--m-maptext:#a3abbc;--m-halo:#2b3445;--m-hwy:#4b5870;--m-hwyc:#2b3445;--m-watert:#7f9ee3;--m-city:#e6e9ef;--m-parkt:#6cc08f;--m-parkc:#3f9a5c;--m-needle:#3b4c70;--m-needlei:#d6dcea;--m-needlet:#a3abbc;--m-medge:rgba(255,255,255,.14);--m-btn:rgba(40,44,56,.72);--m-btnh:rgba(52,57,72,.85);--m-btnt:#4a9dff;--m-shd:.4;--m-refd:#e6e9ef;--m-pinring:#fff}}
+:root[data-theme=dark]{--m-land:#2b3445;--m-park:#1f4a45;--m-water:#16255c;--m-maptext:#a3abbc;--m-halo:#2b3445;--m-hwy:#4b5870;--m-hwyc:#2b3445;--m-watert:#7f9ee3;--m-city:#e6e9ef;--m-parkt:#6cc08f;--m-parkc:#3f9a5c;--m-needle:#3b4c70;--m-needlei:#d6dcea;--m-needlet:#a3abbc;--m-medge:rgba(255,255,255,.14);--m-btn:rgba(40,44,56,.72);--m-btnh:rgba(52,57,72,.85);--m-btnt:#4a9dff;--m-shd:.4;--m-refd:#e6e9ef;--m-pinring:#fff}
 :root[data-theme=light]{color-scheme:light}
 :root[data-theme=dark]{color-scheme:dark}
 *{margin:0;padding:0;box-sizing:border-box;min-width:0}
@@ -67,35 +70,34 @@ h3{font-size:21px;font-weight:600;line-height:1.25;margin-top:36px}
 h4{font-size:15px;font-weight:600;color:var(--secondary);margin-top:28px;padding-bottom:8px;border-bottom:1px solid var(--divider)}
 
 .map{position:relative;height:300px;margin-top:20px;border-radius:12px;overflow:hidden;background:var(--water);}
-.map::after,.thumb::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);pointer-events:none;z-index:1}
+.map::after,.thumb::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px var(--m-medge);pointer-events:none;z-index:1}
 .map.tall{height:440px}
 .map svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .map .land,.thumb .land{fill:var(--land)}
 .map .park,.thumb .park{fill:var(--park)}
-.map,.thumb{color-scheme:light}
-.map .ref-d{fill:#1d1d1f;font-weight:700}
+.map .ref-d{fill:var(--m-refd);font-weight:700}
 .map .wat{fill:var(--water)}
-.map .shd,.thumb .shd{fill:#000;fill-opacity:.14}
-.obtn{position:absolute;right:10px;bottom:10px;z-index:2;display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 14px;border-radius:999px;border:0;background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);box-shadow:0 0 0 1px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04);color:#007aff;font:600 13px var(--font);text-decoration:none}
-.obtn:hover{text-decoration:none;background:rgba(255,255,255,.85)}
+.map .shd,.thumb .shd{fill:#000;fill-opacity:var(--m-shd)}
+.obtn{position:absolute;right:10px;bottom:10px;z-index:2;display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 14px;border-radius:999px;border:0;background:var(--m-btn);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);box-shadow:0 0 0 1px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04);color:var(--m-btnt);font:600 13px var(--font);text-decoration:none}
+.obtn:hover{text-decoration:none;background:var(--m-btnh)}
 .obtn svg{position:static;inset:auto;display:block;width:9px;height:9px;fill:currentColor}
 .obtn:focus-visible{outline:2px solid #007aff;outline-offset:2px}
-.map .hwy{fill:none;stroke:#b4b7b9;stroke-linejoin:round;stroke-linecap:round}
-.map .hwy-c{fill:none;stroke:#fff;stroke-linejoin:round;stroke-linecap:round}
+.map .hwy{fill:none;stroke:var(--m-hwy);stroke-linejoin:round;stroke-linecap:round}
+.map .hwy-c{fill:none;stroke:var(--m-hwyc);stroke-linejoin:round;stroke-linecap:round}
 .map .sh-b{fill:#2f5fb3;stroke:#fff}
 .map .sh-r{fill:#d33a3a}
 .map .shield text{fill:#fff;font-family:var(--font);font-weight:700;text-anchor:middle;dominant-baseline:central;stroke:none}
-.map text{paint-order:stroke;stroke:#fff;stroke-opacity:.9;font-family:var(--font);text-anchor:middle;dominant-baseline:central}
-.map .area{fill:#5b5b60;font-weight:600;letter-spacing:.06em}
-.map .water{fill:#4f86c6;font-style:italic;font-weight:500;stroke:none}
-.map .city{fill:#3a3a3c;font-weight:700}
-.map .park-c{fill:#4caf50;stroke:#fff}
-.map .park-t{fill:#3f7f45;font-weight:600}
+.map text{paint-order:stroke;stroke:var(--m-halo);stroke-opacity:.9;font-family:var(--font);text-anchor:middle;dominant-baseline:central}
+.map .area{fill:var(--m-maptext);font-weight:600;letter-spacing:.06em}
+.map .water{fill:var(--m-watert);font-style:italic;font-weight:500;stroke:none}
+.map .city{fill:var(--m-city);font-weight:700}
+.map .park-c{fill:var(--m-parkc);stroke:var(--m-pinring)}
+.map .park-t{fill:var(--m-parkt);font-weight:600}
 .map .poi-t{font-weight:600}
-.map .needle-c{fill:#a9c8f7;stroke:#fff}
-.map .needle path{fill:none;stroke:#2d3440;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.map .needle path:nth-child(2){fill:#2d3440}
-.map .needle-t{fill:#6e6e73;font-weight:600;letter-spacing:.04em}
+.map .needle-c{fill:var(--m-needle);stroke:var(--m-pinring)}
+.map .needle path{fill:none;stroke:var(--m-needlei);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.map .needle path:nth-child(2){fill:var(--m-needlei)}
+.map .needle-t{fill:var(--m-needlet);font-weight:600;letter-spacing:.04em}
 
 .map .pin circle,.thumb .pin circle{stroke:#fff}
 .map .pin text{fill:#fff;font-family:var(--font);font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none}
