@@ -24,7 +24,8 @@ a:hover{border-bottom:1px solid var(--fg3)}
 a:focus-visible{outline:2px solid var(--fg3);outline-offset:2px;border-radius:2px}
 body{padding:2rem 0}
 .page-title{max-width:var(--width);padding:0 2rem;margin:2rem auto .5rem;font-size:1.5rem;font-weight:400;letter-spacing:-.03rem;text-align:left;color:var(--fg1)}
-.menu{position:sticky;top:0;z-index:2;background:var(--bg);overflow-x:auto;scrollbar-width:none;padding:1rem 0;margin-bottom:2rem}
+.menu{position:sticky;top:0;z-index:2;background:var(--bg);overflow-x:auto;scrollbar-width:none;padding:1rem 0;margin-bottom:2rem;border-bottom:1px solid transparent;transition:border-color .2s}
+.menu.stuck{border-bottom-color:var(--divider)}
 .menu::-webkit-scrollbar{display:none}
 .menu ul{list-style:none;white-space:nowrap;padding-left:max(2rem,calc(50vw - 15rem + 2rem))}
 .menu li{display:inline-block;margin-right:1rem}
@@ -75,6 +76,7 @@ const set=id=>{links.forEach(a=>a.classList.toggle('on',a===byId[id]));const a=b
 const seen=new Map();
 const io=new IntersectionObserver(es=>{es.forEach(e=>seen.set(e.target.id,e.isIntersecting));const first=[...document.querySelectorAll('main section')].find(s=>seen.get(s.id));if(first)set(first.id)},{rootMargin:'-80px 0px -60% 0px'});
 document.querySelectorAll('main section').forEach(s=>io.observe(s));
+const nav=document.querySelector('.menu');const onScroll=()=>nav.classList.toggle('stuck',nav.getBoundingClientRect().top<=0&&scrollY>0);addEventListener('scroll',onScroll,{passive:true});onScroll();
 }
 </script>
 </body>
