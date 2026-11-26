@@ -31,9 +31,9 @@
 --red:light-dark(#ff383c,#ff4245);--accent:light-dark(#0066cc,#2997ff);--bar:light-dark(rgba(255,255,255,.85),rgba(0,0,0,.8));
 --land:var(--m-land);--park:var(--m-park);--water:var(--m-water);--maptext:var(--m-maptext);
 --stay:#af52de;--eat:#ff9500;--do:#ff2d55}
-:root{--m-land:#f9f8f4;--m-park:#c3e0a3;--m-water:#8cc9f2;--m-maptext:#5b5b60;--m-halo:#fff;--m-hwy:#b4b7b9;--m-hwyc:#fff;--m-watert:#4f86c6;--m-city:#3a3a3c;--m-parkt:#3f7f45;--m-parkc:#4caf50;--m-needle:#a9c8f7;--m-needlei:#2d3440;--m-needlet:#6e6e73;--m-medge:rgba(0,0,0,.1);--m-btn:rgba(255,255,255,.72);--m-btnh:rgba(255,255,255,.85);--m-btnt:#007aff;--m-shd:.14;--m-refd:#1d1d1f;--m-pinring:#fff}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--m-land:#2b3445;--m-park:#1f4a45;--m-water:#16255c;--m-maptext:#a3abbc;--m-halo:#2b3445;--m-hwy:#4b5870;--m-hwyc:#2b3445;--m-watert:#7f9ee3;--m-city:#e6e9ef;--m-parkt:#6cc08f;--m-parkc:#3f9a5c;--m-needle:#3b4c70;--m-needlei:#d6dcea;--m-needlet:#a3abbc;--m-medge:rgba(255,255,255,.14);--m-btn:rgba(40,44,56,.72);--m-btnh:rgba(52,57,72,.85);--m-btnt:#4a9dff;--m-shd:.4;--m-refd:#e6e9ef;--m-pinring:#fff}}
-:root[data-theme=dark]{--m-land:#2b3445;--m-park:#1f4a45;--m-water:#16255c;--m-maptext:#a3abbc;--m-halo:#2b3445;--m-hwy:#4b5870;--m-hwyc:#2b3445;--m-watert:#7f9ee3;--m-city:#e6e9ef;--m-parkt:#6cc08f;--m-parkc:#3f9a5c;--m-needle:#3b4c70;--m-needlei:#d6dcea;--m-needlet:#a3abbc;--m-medge:rgba(255,255,255,.14);--m-btn:rgba(40,44,56,.72);--m-btnh:rgba(52,57,72,.85);--m-btnt:#4a9dff;--m-shd:.4;--m-refd:#e6e9ef;--m-pinring:#fff}
+:root{--m-land:#f9f8f4;--m-park:#c3e0a3;--m-water:#8cc9f2;--m-maptext:#5b5b60;--m-halo:#fff;--m-hwy:#b4b7b9;--m-hwyc:#fff;--m-watert:#4f86c6;--m-city:#3a3a3c;--m-parkt:#3f7f45;--m-parkc:#4caf50;--m-needle:#a9c8f7;--m-needlei:#2d3440;--m-needlet:#6e6e73;--m-medge:rgba(0,0,0,.1);--m-btn:rgba(255,255,255,.72);--m-btnh:rgba(255,255,255,.85);--m-btnt:#007aff;--m-shd:.14;--m-refd:#1d1d1f;--m-pinring:#fff;--m-road:#fff;--m-roadc:#e4e2dc}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--m-land:#2b3445;--m-park:#1f4a45;--m-water:#16255c;--m-maptext:#a3abbc;--m-halo:#2b3445;--m-hwy:#4b5870;--m-hwyc:#2b3445;--m-watert:#7f9ee3;--m-city:#e6e9ef;--m-parkt:#6cc08f;--m-parkc:#3f9a5c;--m-needle:#3b4c70;--m-needlei:#d6dcea;--m-needlet:#a3abbc;--m-medge:rgba(255,255,255,.14);--m-btn:rgba(40,44,56,.72);--m-btnh:rgba(52,57,72,.85);--m-btnt:#4a9dff;--m-shd:.4;--m-refd:#e6e9ef;--m-pinring:#fff;--m-road:#3a4559;--m-roadc:#2b3445}}
+:root[data-theme=dark]{--m-land:#2b3445;--m-park:#1f4a45;--m-water:#16255c;--m-maptext:#a3abbc;--m-halo:#2b3445;--m-hwy:#4b5870;--m-hwyc:#2b3445;--m-watert:#7f9ee3;--m-city:#e6e9ef;--m-parkt:#6cc08f;--m-parkc:#3f9a5c;--m-needle:#3b4c70;--m-needlei:#d6dcea;--m-needlet:#a3abbc;--m-medge:rgba(255,255,255,.14);--m-btn:rgba(40,44,56,.72);--m-btnh:rgba(52,57,72,.85);--m-btnt:#4a9dff;--m-shd:.4;--m-refd:#e6e9ef;--m-pinring:#fff;--m-road:#3a4559;--m-roadc:#2b3445}
 :root[data-theme=light]{color-scheme:light}
 :root[data-theme=dark]{color-scheme:dark}
 *{margin:0;padding:0;box-sizing:border-box;min-width:0}
@@ -82,6 +82,9 @@ h4{font-size:15px;font-weight:600;color:var(--secondary);margin-top:28px;padding
 .obtn:hover{text-decoration:none;background:var(--m-btnh)}
 .obtn svg{position:static;inset:auto;display:block;width:9px;height:9px;fill:currentColor}
 .obtn:focus-visible{outline:2px solid #007aff;outline-offset:2px}
+.map .st{fill:none;stroke:var(--m-road);stroke-linejoin:round;stroke-linecap:round}
+.map .st-c{fill:none;stroke:var(--m-roadc);stroke-linejoin:round;stroke-linecap:round}
+.map .st-t{fill:var(--m-maptext);font-weight:500}
 .map .hwy{fill:none;stroke:var(--m-hwy);stroke-linejoin:round;stroke-linecap:round}
 .map .hwy-c{fill:none;stroke:var(--m-hwyc);stroke-linejoin:round;stroke-linecap:round}
 .map .sh-b{fill:#2f5fb3;stroke:#fff}
@@ -303,9 +306,13 @@ for(const k in P)P[k].ic='fork';
 const OPENTG=new Set(['saltys']);
 const CLOSED=new Set(['spinasse', 'canon', 'pinkdoor', 'piroshky', 'crumpet', 'oriental', 'hellenika', 'ono']);
 const groups=[
- ['Capitol Hill, Downtown and Pike Place','Close to the stays, from Pike Place to Pioneer Square.','eatS',['aquarium','spinasse','canon','golmok','unicorn','ladive','pinkdoor','piroshky','crumpet','oriental','hellenika','ono','lepichet','kedai','sead','busan','bemi','legrey','chowder','altura','bathtub','zigzag','cobbs','pst','narrative','postalley','daymade','tanhuo']],
- ['Ballard, Fremont and North','North of Lake Union. Plan a day up here.','eatN',['fremontmkt','gasworks','goodmart','situ','backyard','seawolf','localtide','kamonegi','steakeasy','bunbun','maqluba','indigo','fram','walrus']],
- ['Elsewhere','Worth the trip.',null,['saltys','banhmiland']]
+ ['Pike Place Market','','e1',['piroshky','oriental','crumpet','hellenika','ono','chowder','pinkdoor','lepichet','cobbs','zigzag']],
+ ['Belltown and Downtown','','e2',['kedai','bathtub','aquarium','pst','narrative','postalley']],
+ ['Capitol Hill','','e3',['sead','spinasse','canon','golmok','unicorn','ladive','busan','altura']],
+ ['Pioneer Square and Chinatown–ID','','e4',['bemi','legrey','tanhuo','daymade']],
+ ['Fremont, Wallingford and Lake Union','','e5',['fremontmkt','gasworks','backyard','seawolf','localtide','kamonegi','steakeasy','indigo','fram']],
+ ['Ballard and Greenwood','','e6',['goodmart','situ','walrus','bunbun','maqluba']],
+ ['Elsewhere','',null,['saltys','banhmiland']]
 ];
 const MEM=new Set(['sead','goodmart']);
 const MARKET=new Set(['piroshky','oriental','crumpet','hellenika','ono','chowder','pinkdoor']);
@@ -320,7 +327,7 @@ const row=(p,k)=>`<li>${thumb(p,'var(--eat)')}
  ${CLOSED.has(k)?`<span class="closed">${ico('alert')}Closed Thanksgiving</span>`:''}
  ${p.x?`<span class="note">${ico('alert')}${esc(p.x)}</span>`:''}
  <span class="links">${p.u?`<a href="${p.u}">Website</a>`:''}<a href="${mapUrl(p)}">Maps</a>${p.ig?`<a href="https://www.instagram.com/${p.ig}/">Instagram</a>`:''}</span></li>`;
-$('food').innerHTML=groups.map(([t,sub,mk,ks])=>`<h3>${esc(t)}</h3>${mk?`<div class="map${mk==='eatS'?' tall':''}" data-set="${mk}" role="img" aria-label="Map of ${esc(t)}"></div>`:''}<ul class="rows" style="margin-top:16px;border-top:1px solid var(--divider)">${ks.map(k=>row(P[k],k)).join('')}</ul>`).join('');
+$('food').innerHTML=groups.map(([t,sub,mk,ks])=>`<h3>${esc(t)}</h3>${mk?`<div class="map" data-set="${mk}" role="img" aria-label="Map of ${esc(t)}"></div>`:''}<ul class="rows" style="margin-top:16px;border-top:1px solid var(--divider)">${ks.map(k=>row(P[k],k)).join('')}</ul>`).join('');
 
 /* Do */
 const todo=[
@@ -346,12 +353,34 @@ $('trips').innerHTML=trips.map(doRow).join('');
 
 /* Maps */
 const fp=Object.values(P).filter(p=>p.ll);stays.forEach(x=>x.col='var(--stay)');Object.values(P).forEach(x=>x.col='var(--eat)');todo.forEach(x=>x.col='var(--do)');
-const sets={all:[...stays,...['piroshky','spinasse','ladive','tanhuo','localtide','situ','steakeasy','seawolf','gasworks','kamonegi','backyard','pinkdoor'].map(k=>P[k]),todo[0],todo[1]],stay:stays,eatS:groups[0][3].map(k=>P[k]),eatN:groups[1][3].map(k=>P[k]),do:todo};
+const sets={...Object.fromEntries(groups.filter(g=>g[2]).map(g=>[g[2],g[3].map(k=>P[k])])),all:[...stays,...['piroshky','spinasse','ladive','tanhuo','localtide','situ','steakeasy','seawolf','gasworks','kamonegi','backyard','pinkdoor'].map(k=>P[k]),todo[0],todo[1]],stay:stays,do:todo};
 const HOODS=[['Ballard',47.6690,-122.3840],['Fremont',47.6530,-122.3520],['Wallingford',47.6615,-122.3340],['University District',47.6625,-122.3125],['Magnolia',47.6500,-122.4000],['Interbay',47.6460,-122.3790],['Queen Anne',47.6370,-122.3575],['Lower Queen Anne',47.6245,-122.3560],['Westlake',47.6400,-122.3440],['Eastlake',47.6430,-122.3265],['Montlake',47.6405,-122.3045],['South Lake Union',47.6255,-122.3375],['Capitol Hill',47.6255,-122.3140],['Belltown',47.6145,-122.3465],['Downtown',47.6055,-122.3350],['First Hill',47.6085,-122.3235],['Central District',47.6085,-122.3010],['Madrona',47.6125,-122.2885],['Pioneer Square',47.6005,-122.3320],['International District',47.5975,-122.3235],['SODO',47.5830,-122.3345]];
 const WATERS=[['Elliott Bay',47.6030,-122.3620,13],['Lake Union',47.6380,-122.3378,12],['Portage Bay',47.6478,-122.3125,10],['Union Bay',47.6535,-122.2900,11],['Lake Washington',47.6150,-122.2700,14],['Salmon Bay',47.6625,-122.3920,10],['Puget Sound',47.6250,-122.4250,14]];
 const PARKS=[['Discovery Park',47.6573,-122.4058],['Volunteer Park',47.6300,-122.3150],['Interlaken Park',47.6372,-122.3085],['Washington Park Arboretum',47.6395,-122.2945],['Cal Anderson Park',47.6172,-122.3195],['Kerry Park',47.6295,-122.3599],['Myrtle Edwards Park',47.6195,-122.3600],['Madrona Park',47.6125,-122.2780]];
-const POIS=[['Museum of History & Industry',47.6275,-122.3365,'#d1477a','art'],['The Paramount Theatre',47.6134,-122.3317,'#d1477a','star'],['Lumen Field',47.5952,-122.3316,'#6e6e73','star'],['University of Washington',47.6553,-122.3035,'#8a6a4f','plan'],['Seattle University',47.6097,-122.3172,'#8a6a4f','plan'],['Husky Stadium',47.6503,-122.3016,'#34a853','star']];
+const POIS=[['Pike Place Market',47.6094,-122.3418,'#8e8e93','star'],['Westlake Center',47.6117,-122.3372,'#8e8e93','star'],['Seattle Great Wheel',47.6062,-122.3425,'#8e8e93','star'],['Smith Tower',47.6018,-122.3318,'#8e8e93','star'],['Uwajimaya',47.5973,-122.3265,'#8e8e93','star'],['Fremont Troll',47.6510,-122.3473,'#8e8e93','star'],['Ballard Locks',47.6655,-122.3972,'#8e8e93','tree'],['Museum of History & Industry',47.6275,-122.3365,'#d1477a','art'],['The Paramount Theatre',47.6134,-122.3317,'#d1477a','star'],['Lumen Field',47.5952,-122.3316,'#6e6e73','star'],['University of Washington',47.6553,-122.3035,'#8a6a4f','plan'],['Seattle University',47.6097,-122.3172,'#8a6a4f','plan'],['Husky Stadium',47.6503,-122.3016,'#34a853','star']];
 const WIDE=[['Seattle',47.6150,-122.3350,22,'city'],['West Seattle',47.5650,-122.3870,11,'area'],['Bellevue',47.6100,-122.2000,13,'city2'],['Renton',47.4850,-122.2100,12,'city2'],['Burien',47.4700,-122.3470,12,'city2'],['Mercer Island',47.5700,-122.2250,11,'area'],['Puget Sound',47.5500,-122.4550,14,'water'],['Lake Washington',47.5600,-122.2500,13,'water']];
+const STREETS=[
+ ['1st Ave',[[47.5965,-122.3343],[47.6017,-122.3356],[47.6052,-122.3375],[47.6090,-122.3404],[47.6130,-122.3445],[47.6170,-122.3497],[47.6187,-122.3522]]],
+ ['3rd Ave',[[47.5990,-122.3300],[47.6040,-122.3325],[47.6100,-122.3378],[47.6150,-122.3432],[47.6185,-122.3478]]],
+ ['Alaskan Way',[[47.5980,-122.3355],[47.6040,-122.3388],[47.6090,-122.3428],[47.6140,-122.3483],[47.6180,-122.3535]]],
+ ['Pike St',[[47.6094,-122.3418],[47.6112,-122.3385],[47.6125,-122.3340],[47.6135,-122.3290],[47.6141,-122.3230],[47.6142,-122.3150]]],
+ ['Denny Way',[[47.6190,-122.3560],[47.6185,-122.3480],[47.6180,-122.3400],[47.6182,-122.3300],[47.6183,-122.3200]]],
+ ['Yesler Way',[[47.6017,-122.3355],[47.6020,-122.3270],[47.6018,-122.3140]]],
+ ['S Jackson St',[[47.5990,-122.3345],[47.5990,-122.3250],[47.5992,-122.3140],[47.5993,-122.3000]]],
+ ['Broadway',[[47.5990,-122.3207],[47.6080,-122.3207],[47.6142,-122.3207],[47.6250,-122.3208],[47.6345,-122.3210]]],
+ ['12th Ave',[[47.6000,-122.3170],[47.6150,-122.3170],[47.6250,-122.3170]]],
+ ['15th Ave E',[[47.6150,-122.3125],[47.6320,-122.3125]]],
+ ['N 36th St',[[47.6516,-122.3600],[47.6516,-122.3420]]],
+ ['Fremont Ave N',[[47.6490,-122.3500],[47.6610,-122.3500]]],
+ ['Stone Way N',[[47.6490,-122.3421],[47.6620,-122.3421]]],
+ ['N 45th St',[[47.6614,-122.3500],[47.6614,-122.3170]]],
+ ['N Northlake Way',[[47.6480,-122.3400],[47.6476,-122.3221]]],
+ ['Ballard Ave NW',[[47.6636,-122.3790],[47.6672,-122.3846],[47.6686,-122.3860]]],
+ ['NW Market St',[[47.6687,-122.3950],[47.6687,-122.3760],[47.6687,-122.3550]]],
+ ['15th Ave NW',[[47.6550,-122.3765],[47.6800,-122.3765]]],
+ ['Greenwood Ave N',[[47.6750,-122.3553],[47.6950,-122.3553]]],
+ ['N 85th St',[[47.6908,-122.3700],[47.6908,-122.3400]]]
+];
 const HWY=[
  {n:'5',p:[[47.5600,-122.3220],[47.5900,-122.3210],[47.5990,-122.3225],[47.6060,-122.3285],[47.6110,-122.3290],[47.6175,-122.3270],[47.6255,-122.3243],[47.6350,-122.3228],[47.6440,-122.3220],[47.6530,-122.3216],[47.6620,-122.3200],[47.6720,-122.3220],[47.6900,-122.3230],[47.7300,-122.3240]],s:[47.6350,-122.3228],w:4.5},
  {n:'90',p:[[47.5900,-122.3200],[47.5893,-122.3050],[47.5890,-122.2950],[47.5893,-122.2830],[47.5895,-122.2650],[47.5880,-122.2400]],s:[47.5893,-122.2700],w:4},
@@ -360,7 +389,7 @@ const HWY=[
 ];
 const refs=[{n:'King Street Station',ic:'train',c:'#007aff',ll:[47.5983,-122.3297],q:'King Street Station, Seattle, WA'},{n:'City center',ic:'star',c:'#30b0c7',ll:[47.6115,-122.3375],q:'Westlake Center, Seattle, WA'},{n:'SEA Airport',ic:'plane',c:'#5856d6',ll:[47.4502,-122.3088],q:'Seattle-Tacoma International Airport'}];
 const miles=(a,b)=>{const R=3958.8,r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r;const h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
-const cols={all:null,stay:'var(--stay)',eatS:'var(--eat)',eatN:'var(--eat)',do:'var(--do)'};
+const cols={all:null,stay:'var(--stay)',do:'var(--do)'};groups.forEach(g=>{if(g[2])cols[g[2]]='var(--eat)'});
 document.querySelectorAll('.map').forEach(el=>{
  const key=el.dataset.set,pts=sets[key];
  const xy=pts.map(p=>prj(p.ll));
@@ -369,7 +398,7 @@ document.querySelectorAll('.map').forEach(el=>{
   const wide=el.dataset.z==='out';
   const fit=wide?[...xy,...refs.map(r=>prj(r.ll))]:(key==='stay'||key==='do')?[...xy,...refs.slice(0,2).map(r=>prj(r.ll))]:xy;
   let x0=Math.min(...fit.map(p=>p[0])),x1=Math.max(...fit.map(p=>p[0])),y0=Math.min(...fit.map(p=>p[1])),y1=Math.max(...fit.map(p=>p[1]));
-  const minSpan=key==='eatS'||key==='eatN'?160:320;
+  const minSpan=key[0]==='e'?55:320;
   let cx=(x0+x1)/2,cy=(y0+y1)/2,sw=Math.max(x1-x0,minSpan),sh=Math.max(y1-y0,minSpan);
   let pad=54,s=Math.min((W-pad*2)/sw,(H-pad*2)/sh);
   if(el.dataset.view){const v=el.dataset.view.split(',').map(Number),c=prj([v[0],v[1]]);cx=c[0];cy=c[1];s=W/v[2]}
@@ -390,6 +419,8 @@ document.querySelectorAll('.map').forEach(el=>{
   const tw=(t,fs,k=.6)=>t.length*fs*k*u;
   const put=(t,x,y,fs,cls,k=.6,extra=0)=>{const w=tw(t,fs,k)+extra,h=fs*1.25*u;const bx=x-w/2,by=y-h/2;if(!inB(bx,by,w,h)||!free(bx,by,w,h))return '';occ.push([bx,by,w,h]);return `<text class="${cls}" x="${x}" y="${y}" font-size="${fs*u}" stroke-width="${3*u}">${t}</text>`};
   let base='';
+  const close=u<1.4;
+  if(close){STREETS.forEach(([n,p])=>{base+=`<path d="${line(p)}" class="st-c" stroke-width="${5*u}"/><path d="${line(p)}" class="st" stroke-width="${3.4*u}"/>`});}
   HWY.forEach(h=>{base+=`<path d="${line(h.p)}" class="hwy-c" stroke-width="${(h.w+1.6)*u}"/><path d="${line(h.p)}" class="hwy" stroke-width="${h.w*u}"/>`});
   let lab='';
   if(!wide){
@@ -397,6 +428,7 @@ document.querySelectorAll('.map').forEach(el=>{
    HWY.forEach(h=>{const [x,y]=prj(h.s);if(!inV(x,y,14)||!free(x-9*u,y-8*u,18*u,16*u))return;occ.push([x-9*u,y-8*u,18*u,16*u]);const w=(h.n.length>1?20:16)*u;lab+=`<g class="shield"><path d="M${x-w/2} ${y-7*u}h${w}v${8*u}q0 ${6*u} ${-w/2} ${7*u}q${-w/2} ${-1*u} ${-w/2} ${-7*u}z" class="sh-b" stroke-width="${1.2*u}"/><path d="M${x-w/2} ${y-7*u}h${w}v${3*u}h${-w}z" class="sh-r"/><text x="${x}" y="${y+1.5*u}" font-size="${(h.n.length>2?7:8.5)*u}">${h.n}</text></g>`});
    HOODS.forEach(([n,la,ln])=>{const [x,y]=prj([la,ln]);lab+=put(n.toUpperCase(),x,y,10.5,'area',.66)});
    WATERS.forEach(([n,la,ln,fs])=>{const [x,y]=prj([la,ln]);lab+=put(n,x,y,fs,'water',.55)});
+   if(close)STREETS.forEach(([n,p])=>{const pts=p.map(prj);let best=null;for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1],L=Math.hypot(x2-x1,y2-y1);const mx=(x1+x2)/2,my=(y1+y2)/2;if(inV(mx,my,30)&&(!best||L>best.L))best={L,mx,my,ang:Math.atan2(y2-y1,x2-x1)*180/Math.PI}}if(!best)return;let ang=best.ang;if(ang>90)ang-=180;if(ang<-90)ang+=180;const w=tw(n,9.5,.58),h=12*u;const bx=best.mx-w/2,by=best.my-h/2;if(!free(bx,by,w,h))return;occ.push([bx,by,w,h]);lab+=`<text class="st-t" x="${best.mx}" y="${best.my}" font-size="${9.5*u}" stroke-width="${2.5*u}" transform="rotate(${ang} ${best.mx} ${best.my})">${n}</text>`});
    POIS.forEach(([n,la,ln,c,ic])=>{const [x,y]=prj([la,ln]);if(!inV(x,y,0)||!free(x-8*u,y-8*u,16*u,16*u))return;const t=put(n,x,y+17*u,10,'poi-t',.56);if(!t)return;occ.push([x-8*u,y-8*u,16*u,16*u]);lab+=`<circle cx="${x}" cy="${y}" r="${7.5*u}" fill="${c}" stroke="#fff" stroke-width="${1.5*u}"/><use href="#i-${ic}" x="${x-4.5*u}" y="${y-4.5*u}" width="${9*u}" height="${9*u}" fill="#fff"/>`+t.replace('class="poi-t"',`class="poi-t" fill="${c}"`)});
    PARKS.forEach(([n,la,ln])=>{const [x,y]=prj([la,ln]);if(!inV(x,y,0)||!free(x-8*u,y-8*u,16*u,16*u))return;const t=put(n,x,y+17*u,10,'park-t',.56);if(!t)return;occ.push([x-8*u,y-8*u,16*u,16*u]);lab+=`<circle cx="${x}" cy="${y}" r="${7.5*u}" class="park-c" stroke-width="${1.5*u}"/><use href="#i-tree" x="${x-4.5*u}" y="${y-4.5*u}" width="${9*u}" height="${9*u}" fill="#fff"/>`+t});
   }else{
