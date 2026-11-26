@@ -18,6 +18,9 @@
 <meta name="twitter:description" content="Thanksgiving Adventures">
 <meta name="twitter:image" content="https://carlos-m.com/seattle/og.png">
 <title>Seattle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
 <style>
 /* VOICE a single-column Apple-style document: calm, left-aligned, no ornament
    IDEA an Apple support/newsroom article with inline Apple Maps-like figures
@@ -25,7 +28,7 @@
    COLOUR system background and labels; map land/water greys and blues; pins in section colour
    TYPE system font (SF)
    LAYOUT one 640px column, everything flush left; same on phone */
-:root{color-scheme:light dark;--font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+:root{color-scheme:light dark;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
 --bg:light-dark(#ffffff,#000000);--label:light-dark(#1d1d1f,#f5f5f7);--secondary:light-dark(#6e6e73,#98989d);
 --divider:light-dark(#e4e4e7,#222223);--tile:light-dark(#ffffff,#1c1c1e);--tile-edge:light-dark(rgba(0,0,0,.1),rgba(255,255,255,.12));
 --red:light-dark(#ff383c,#ff4245);--accent:light-dark(#0066cc,#2997ff);--bar:light-dark(rgba(255,255,255,.85),rgba(0,0,0,.8));
@@ -38,7 +41,7 @@
 :root[data-theme=dark]{color-scheme:dark}
 *{margin:0;padding:0;box-sizing:border-box;min-width:0}
 html{scroll-padding-top:60px;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--label);font:400 17px/1.47 var(--font);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{background:var(--bg);color:var(--label);font:400 17px/1.47 var(--font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;overflow-x:clip}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
