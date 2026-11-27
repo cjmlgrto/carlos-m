@@ -129,6 +129,8 @@ h4{font-size:15px;font-weight:600;color:var(--secondary);margin-top:28px;padding
 .num.none{background:transparent;color:var(--secondary);box-shadow:inset 0 0 0 1px var(--divider)}
 .name{font-weight:600}
 .sub,.note,.closed{grid-column:2;font-size:15px;color:var(--secondary)}
+.done .name{text-decoration:line-through;text-decoration-thickness:1.5px;color:var(--secondary)}
+.done .sub{opacity:.55}
 .hrs.open{color:light-dark(#248a3d,#30d158)}
 .hrs.shut{color:var(--secondary);opacity:.7}
 .name .must{width:13px;height:13px;margin:0 0 0 6px;vertical-align:-1px;color:light-dark(#ff9500,#ffb340);fill:currentColor}
@@ -229,6 +231,8 @@ stays.forEach((s,i)=>{s.no=i+1;s.ic='house'});
 
 /* Eat */
 const P={
+meesum:{n:'Mee Sum Pastry',k:'Chinese buns and dim sum, takeout only',a:'1526 Pike Pl',ll:[47.6093,-122.3414],h:'Daily 8–7',u:'https://meesum.com'},
+marketgrill:{n:'Market Grill',k:'Blackened salmon sandwich and chowder',a:'1509 Pike Pl',ll:[47.6088,-122.3410],u:'https://www.pikeplacemarket.org/vendor/market-grill/'},
  aquarium:{n:'Seattle Aquarium',k:'Attraction',a:'Pier 59',ll:[47.6076,-122.3430],h:'Daily 9:30–6, Thanksgiving 9:30–4',u:'https://www.seattleaquarium.org'},
  fremontmkt:{n:'Fremont Sunday Market',k:'Market',ll:[47.6496,-122.3497],h:'Sunday, Nov 29, 10–4',u:'https://www.fremontmarket.com'},
  gasworks:{n:'Gas Works Park',k:'Park',ll:[47.6456,-122.3344],h:'Daily 6 a.m.–10 p.m.'},
@@ -287,12 +291,12 @@ for(const k in P)P[k].ic='fork';
 ['canon', 'unicorn', 'ladive', 'pst'].forEach(k=>P[k].ic='wine');
 ['gasworks', 'fremontmkt'].forEach(k=>P[k].ic='tree');
 ['aquarium'].forEach(k=>P[k].ic='art');
-['indigo','legrey','fram','vita'].forEach(k=>P[k].ic='cup');
+['indigo','legrey','fram','vita','meesum'].forEach(k=>P[k].ic='cup');
 ['bathtub','zigzag'].forEach(k=>P[k].ic='wine');
 const OPENTG=new Set(['saltys']);
 const CLOSED=new Set(['lowells','spinasse', 'canon', 'pinkdoor', 'piroshky', 'crumpet', 'oriental', 'hellenika', 'ono']);
 const groups=[
- ['Pike Place Market','','e1',['piroshky','oriental','crumpet','hellenika','ono','chowder','pinkdoor','lowells','lepichet','cobbs','zigzag']],
+ ['Pike Place Market','','e1',['piroshky','meesum','marketgrill','oriental','crumpet','hellenika','ono','chowder','pinkdoor','lowells','lepichet','cobbs','zigzag']],
  ['Belltown and Downtown','','e2',['kedai','umi','shiros','roccos','alba','seriouspie','assaggio','bathtub','aquarium','pst','narrative','postalley']],
  ['Seattle Center and Queen Anne','','e7',['vita']],
  ['Capitol Hill','','e3',['sead','spinasse','canon','golmok','unicorn','ladive','busan','altura']],
@@ -302,15 +306,16 @@ const groups=[
  ['Elsewhere','',null,['saltys','banhmiland']]
 ];
 const MEM=new Set(['sead','goodmart']);
-const MARKET=new Set(['lowells','piroshky','oriental','crumpet','hellenika','ono','chowder','pinkdoor']);
+const VISITED=new Set(['piroshky','meesum','lowells','marketgrill']);
+const MARKET=new Set(['meesum','marketgrill','lowells','piroshky','oriental','crumpet','hellenika','ono','chowder','pinkdoor']);
 const MUST={sead:'Most memorable meal, @seattle.grub',goodmart:'Most memorable meal, @seattle.grub',piroshky:'Pike Place Market',oriental:'Pike Place Market',lepichet:'Across from Pike Place Market',localtide:'Fremont and Ballard day',situ:'Fremont and Ballard day',steakeasy:'Fremont and Ballard day, go early',tanhuo:'Late night'};
-groups.forEach(g=>{g[3]=[...g[3].filter(k=>MEM.has(k)),...g[3].filter(k=>MUST[k]&&!MEM.has(k)),...g[3].filter(k=>!MUST[k])]});
+groups.forEach(g=>{const o=[...g[3].filter(k=>MEM.has(k)),...g[3].filter(k=>MUST[k]&&!MEM.has(k)),...g[3].filter(k=>!MUST[k])];g[3]=[...o.filter(k=>!VISITED.has(k)),...o.filter(k=>VISITED.has(k))]});
 let no=0;groups.forEach(g=>g[3].forEach(k=>{if(P[k].ll)P[k].no=++no}));
 const LOCMUST=new Set(['Pike Place Market','Across from Pike Place Market']);
 const sent=t=>t?(/[.!?)]$/.test(t)?t:t+'.'):'';
 const desc=(p,k)=>{let m=MUST[k]&&!LOCMUST.has(MUST[k])?MUST[k]:'',x=p.x||'';if(m.includes('@seattle.grub'))x=x.replace(/\s*From @seattle\.grub\./,'');return [p.k,m,x].filter(Boolean).map((t,i,a)=>i<a.length-1?sent(t):t).join(' ')};
 const hrs=t=>t?`<span class="sub hrs" data-h="${esc(t)}">${ico('clock')}${esc(t)}</span>`:'';
-const row=(p,k)=>`<li>${thumb(p,'var(--eat)')}
+const row=(p,k)=>`<li${VISITED.has(k)?' class="done"':''}>${thumb(p,VISITED.has(k)?'#aeaeb2':'var(--eat)')}
  <span class="name">${esc(p.n)}${MUST[k]?ico('star','must'):''}</span>
  ${hrs(p.h)}
  ${desc(p,k)?`<span class="sub">${esc(desc(p,k))}</span>`:''}
@@ -379,7 +384,7 @@ function tint(){const n=nowSea();document.querySelectorAll('.hrs').forEach(e=>{c
 tint();setInterval(tint,60000);
 
 /* Maps */
-const fp=Object.values(P).filter(p=>p.ll);stays.forEach(x=>x.col='var(--stay)');Object.values(P).forEach(x=>x.col='var(--eat)');todo.forEach(x=>x.col='var(--do)');
+const fp=Object.values(P).filter(p=>p.ll);stays.forEach(x=>x.col='var(--stay)');Object.values(P).forEach(x=>x.col='var(--eat)');VISITED.forEach(k=>P[k].col='#aeaeb2');todo.forEach(x=>x.col='var(--do)');
 const sets={...Object.fromEntries(groups.filter(g=>g[2]).map(g=>[g[2],[...g[3].map(k=>P[k]),...g[4].filter(t=>t.ll)]])),all:[...stays,...['piroshky','spinasse','ladive','tanhuo','localtide','situ','steakeasy','seawolf','gasworks','kamonegi','backyard','pinkdoor'].map(k=>P[k]),todo[0],todo[1]],stay:stays};
 const HOODS=[['Ballard',47.6690,-122.3840],['Fremont',47.6530,-122.3520],['Wallingford',47.6615,-122.3340],['University District',47.6625,-122.3125],['Magnolia',47.6500,-122.4000],['Interbay',47.6460,-122.3790],['Queen Anne',47.6370,-122.3575],['Lower Queen Anne',47.6245,-122.3560],['Westlake',47.6400,-122.3440],['Eastlake',47.6430,-122.3265],['Montlake',47.6405,-122.3045],['South Lake Union',47.6255,-122.3375],['Capitol Hill',47.6255,-122.3140],['Belltown',47.6145,-122.3465],['Downtown',47.6055,-122.3350],['First Hill',47.6085,-122.3235],['Central District',47.6085,-122.3010],['Madrona',47.6125,-122.2885],['Pioneer Square',47.6005,-122.3320],['International District',47.5975,-122.3235],['SODO',47.5830,-122.3345]];
 const WATERS=[['Elliott Bay',47.6030,-122.3620,13],['Lake Union',47.6380,-122.3378,12],['Portage Bay',47.6478,-122.3125,10],['Union Bay',47.6535,-122.2900,11],['Lake Washington',47.6150,-122.2700,14],['Salmon Bay',47.6625,-122.3920,10],['Puget Sound',47.6250,-122.4250,14]];
