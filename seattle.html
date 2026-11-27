@@ -61,8 +61,9 @@ h1{font-size:clamp(40px,10vw,48px);font-weight:700;line-height:1.08;letter-spaci
 .when{font-weight:500}
 
 nav{position:sticky;top:0;z-index:5;background:var(--bar);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--divider)}
-nav .column{display:flex;gap:22px;align-items:center;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
-nav .column::-webkit-scrollbar{display:none}
+nav{overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
+nav::-webkit-scrollbar{display:none}
+nav .column{display:flex;gap:22px;align-items:center;white-space:nowrap;max-width:none;width:max-content;padding:0 max(20px,calc(50vw - 300px))}
 nav a{flex:none}
 .count{font-weight:400;color:var(--secondary);margin-left:6px}
 nav a{display:flex;align-items:center;min-height:48px;color:var(--secondary);font-size:15px;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
@@ -493,8 +494,9 @@ document.querySelectorAll('main a.thumb, .map a').forEach(l=>{l.target='_blank';
 /* Nav */
 const tabs=[...document.querySelectorAll('nav a')];
 const secs=tabs.map(a=>document.querySelector(a.getAttribute('href')));
-const mark=()=>{let i=0;secs.forEach((s,j)=>{if(s.getBoundingClientRect().top<120)i=j});
+let cur=0;const mark=()=>{let i=0;secs.forEach((s,j)=>{if(s.getBoundingClientRect().top<120)i=j});
  if(innerHeight+scrollY>=document.body.scrollHeight-4)i=secs.length-1;
+ if(i!==cur){cur=i;const t=tabs[i],n=document.querySelector('nav');n.scrollTo({left:t.offsetLeft-n.clientWidth/2+t.offsetWidth/2,behavior:'smooth'})}
  tabs.forEach((a,j)=>a.classList.toggle('on',j===i))};
 addEventListener('scroll',mark,{passive:true});mark();
 }
