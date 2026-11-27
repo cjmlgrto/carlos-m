@@ -47,7 +47,7 @@ a:hover{text-decoration:underline}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 .column{max-width:640px;margin:0 auto;padding:0 20px}
 
-header.column{padding:48px 20px 56px}
+header.column{padding:48px 20px 8px}
 h1{font-size:clamp(40px,10vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em}
 .lede{margin-top:12px;font-size:21px;line-height:1.38;color:var(--secondary)}
 
@@ -177,7 +177,6 @@ footer.column{padding:48px 20px 64px;font-size:13px;color:var(--secondary)}
 <header class="column" id="top">
   <h1>Seattle</h1>
   <p class="lede">Thanksgiving Adventures</p>
-  <ul class="dates" id="dates"></ul>
 </header>
 
 
@@ -221,13 +220,7 @@ const thumb=(p,col)=>{
   return `<a class="thumb" href="${mapUrl(p)}" aria-label="Map of ${esc(p.n)}"><svg viewBox="${x-v/2} ${y-v/2} ${v} ${v}"><use href="#land" class="land"/><use href="#parks" class="park"/>${pin(x,y,u*.9,col,p.ic)}</svg></a>`;
 };
 
-$('dates').innerHTML=[
- ['Nov','25','Wednesday','Amtrak to Seattle, 8:50 p.m.',['Bus 5014 to Emeryville','Coast Starlight 14 at 9:41 p.m.','Car 1430, roomettes 9 and 10']],
- ['Nov','26','Thanksgiving','Arrive King Street Station, 7:51 p.m.',['Airbnb check-in from 4 p.m.']],
- ['Nov','29','Sunday','Carlos flies SEA to SFO, 7:00 a.m.',[]],
- ['Dec','1','Tuesday','Amtrak home, 9:55 a.m.',['Check out before the train','Coast Starlight 11','Car 1130, roomettes 9 and 12','Gate closes 5 minutes before departure']],
- ['Dec','2','Wednesday','Arrive Emeryville, 8:29 a.m.',['Bus 5011 to San Francisco, 9:20 a.m.']]
-].map(([m,d,w,t,x])=>`<li class="date"><span class="cal"><span class="m">${m}</span><span class="d">${d}</span></span><div><p class="what">${w}</p><p class="when">${t}</p>${x.map(l=>`<p class="what">${l}</p>`).join('')}</div></li>`).join('');
+
 
 /* Stay */
 const INVITE="";
