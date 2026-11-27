@@ -127,7 +127,9 @@ h4{font-size:15px;font-weight:600;color:var(--secondary);margin-top:28px;padding
 .num.none{background:transparent;color:var(--secondary);box-shadow:inset 0 0 0 1px var(--divider)}
 .name{font-weight:600}
 .sub,.note,.closed{grid-column:2;font-size:15px;color:var(--secondary)}
-.closed{color:var(--red)}
+.hrs.open{color:light-dark(#248a3d,#30d158)}
+.hrs.shut{color:var(--secondary);opacity:.7}
+.name .must{width:13px;height:13px;margin:0 0 0 6px;vertical-align:-1px;color:light-dark(#ff9500,#ffb340);fill:currentColor}
 .ic{width:13px;height:13px;fill:currentColor;vertical-align:-1px;margin-right:6px}
 .mkt{grid-column:2;font-size:15px;font-weight:600;color:var(--label)}
 .must{grid-column:2;font-size:15px;font-weight:600;color:light-dark(#c25e00,#ffb340)}
@@ -203,7 +205,7 @@ const mapUrl=p=>{
   return `https://maps.apple.com/?q=${encodeURIComponent(p.q||p.n+', Seattle, WA')}`;
 };
 const pin=(x,y,u,col,ic)=>`<circle cx="${x}" cy="${y+1.2*u}" r="${13.2*u}" class="shd"/><g class="pin"><circle cx="${x}" cy="${y}" r="${12*u}" fill="${col}" stroke-width="${2*u}"/></g><use href="#i-${ic}" x="${x-6.5*u}" y="${y-6.5*u}" width="${13*u}" height="${13*u}" fill="#fff"/>`;
-const ico=n=>`<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const ico=(n,c='')=>`<svg class="ic ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 
 const K=0.6738,prj=([la,ln])=>[(ln+122.42)*K*1e4,(47.70-la)*1e4];
 const thumb=(p,col)=>{
@@ -302,13 +304,14 @@ const MARKET=new Set(['lowells','piroshky','oriental','crumpet','hellenika','ono
 const MUST={sead:'Most memorable meal, @seattle.grub',goodmart:'Most memorable meal, @seattle.grub',piroshky:'Pike Place Market',oriental:'Pike Place Market',lepichet:'Across from Pike Place Market',localtide:'Fremont and Ballard day',situ:'Fremont and Ballard day',steakeasy:'Fremont and Ballard day, go early',tanhuo:'Late night'};
 groups.forEach(g=>{g[3]=[...g[3].filter(k=>MEM.has(k)),...g[3].filter(k=>MUST[k]&&!MEM.has(k)),...g[3].filter(k=>!MUST[k])]});
 let no=0;groups.forEach(g=>g[3].forEach(k=>{if(P[k].ll)P[k].no=++no}));
+const LOCMUST=new Set(['Pike Place Market','Across from Pike Place Market']);
+const sent=t=>t?(/[.!?)]$/.test(t)?t:t+'.'):'';
+const desc=(p,k)=>{let m=MUST[k]&&!LOCMUST.has(MUST[k])?MUST[k]:'',x=p.x||'';if(m.includes('@seattle.grub'))x=x.replace(/\s*From @seattle\.grub\./,'');return [p.k,m,x].filter(Boolean).map((t,i,a)=>i<a.length-1?sent(t):t).join(' ')};
+const hrs=t=>t?`<span class="sub hrs" data-h="${esc(t)}">${ico('clock')}${esc(t)}</span>`:'';
 const row=(p,k)=>`<li>${thumb(p,'var(--eat)')}
- <span class="name">${esc(p.n)}</span>
- ${MUST[k]?`<span class="must">${ico('star')}${esc(MUST[k])}</span>`:''}${MARKET.has(k)&&MUST[k]!=='Pike Place Market'?`<span class="mkt">${ico('poi')}Pike Place Market</span>`:''}
- ${p.k?`<span class="sub">${esc(p.k)}</span>`:''}
- ${p.h?`<span class="sub">${ico('clock')}${esc(p.h)}</span>`:''}
- ${CLOSED.has(k)?`<span class="closed">${ico('alert')}Closed Thanksgiving</span>`:''}
- ${p.x?`<span class="note">${ico('alert')}${esc(p.x)}</span>`:''}
+ <span class="name">${esc(p.n)}${MUST[k]?ico('star','must'):''}</span>
+ ${desc(p,k)?`<span class="sub">${esc(desc(p,k))}</span>`:''}
+ ${hrs(p.h)}
  <span class="links">${p.u?`<a href="${p.u}">Website</a>`:''}<a href="${mapUrl(p)}">Maps</a>${p.ig?`<a href="https://www.instagram.com/${p.ig}/">Instagram</a>`:''}</span></li>`;
 
 /* Do */
@@ -332,14 +335,46 @@ const trips=[
  {n:'Mount Si',k:'Full day by car',h:'Steep hike near North Bend. Discover Pass required for trailhead parking.',q:'Mount Si Trailhead, North Bend, WA',offShort:'North Bend',u:'https://dnr.wa.gov/natural-areas/natural-resources-conservation-areas/mount-si-natural-resources-conservation-area',l:'Trail info',ic:'tree'}
 ];
 todo.forEach((t,i)=>t.no=i+1);
-const doRow=t=>`<li>${thumb(t,'var(--do)')}<span class="name">${esc(t.n)}</span><span class="sub">${ico('clock')}${esc(t.k)}</span>${t.h?`<span class="sub">${esc(t.h)}</span>`:''}<span class="links">${t.u?`<a href="${t.u}">${t.l}</a>`:''}<a href="${mapUrl(t)}">Maps</a></span></li>`;
+const doRow=t=>`<li>${thumb(t,'var(--do)')}<span class="name">${esc(t.n)}</span>${t.h?`<span class="sub">${esc(t.h)}</span>`:''}${hrs(t.k)}<span class="links">${t.u?`<a href="${t.u}">${t.l}</a>`:''}<a href="${mapUrl(t)}">Maps</a></span></li>`;
 const DOAREA={'Seattle Christmas Market':'e7','Peter Miller Books':'e4','The Lemon Grove':'e4','Ferry to Bainbridge Island':'e2','Chihuly Garden and Glass':'e7','Seattle Art Museum':'e2','Magic in the Market':'e1','Merry Matsuri':'e2','Open Mic Night at Folio':'e1','Seattle Central Library':'e2','Kerry Park':'e7','Discovery Park':'e6'};
 todo.forEach(t=>{t.area=t.area||DOAREA[t.n]||'e2'});
 const AREA_ID={e1:'pike',e2:'downtown',e7:'center',e3:'caphill',e4:'pioneer',e5:'fremont',e6:'ballard'};
 groups.forEach(g=>{g[4]=todo.filter(t=>t.area===g[2])});
 const AREAS=[...groups.map(g=>({id:AREA_ID[g[2]]||'elsewhere',t:g[0],mk:g[2],ks:g[3],dos:g[4]})),{id:'trips',t:'Day trips',mk:null,ks:[],dos:trips}];
-$('areas').innerHTML=AREAS.map(a=>`<section id="${a.id}"><h2>${esc(a.t)} <span class="count">${a.ks.length+a.dos.length}</span></h2>${a.mk?`<div class="map" data-set="${a.mk}" role="img" aria-label="Map of ${esc(a.t)}"></div>`:''}<ul class="rows" style="margin-top:16px;border-top:1px solid var(--divider)">${a.ks.map(k=>row(P[k],k)).join('')}${a.dos.map(doRow).join('')}</ul></section>`).join('');
+$('areas').innerHTML=AREAS.map(a=>`<section id="${a.id}"><h2>${esc(a.t)}</h2>${a.mk?`<div class="map" data-set="${a.mk}" role="img" aria-label="Map of ${esc(a.t)}"></div>`:''}<ul class="rows" style="margin-top:16px;border-top:1px solid var(--divider)">${a.ks.map(k=>row(P[k],k)).join('')}${a.dos.map(doRow).join('')}</ul></section>`).join('');
 $('navareas').innerHTML=AREAS.map(a=>`<a href="#${a.id}">${esc(a.t.split(/,| and /)[0])}</a>`).join('');
+/* Open now, Seattle time */
+const DAYS=['sun','mon','tue','wed','thu','fri','sat'];
+const dayIdx=w=>DAYS.indexOf(w.slice(0,3).toLowerCase());
+function daysOf(f){const out=new Set();let m;f=f.replace(/\bdaily\b|\bnightly\b|every day/i,' Sun–Sat ');
+ if(/weekdays/i.test(f))[1,2,3,4,5].forEach(d=>out.add(d));if(/weekends/i.test(f))[0,6].forEach(d=>out.add(d));
+ const re=/\b(Sun|Mon|Tue|Wed|Thu|Fri|Sat)[a-z]*(?:\s*[–-]\s*(Sun|Mon|Tue|Wed|Thu|Fri|Sat)[a-z]*)?/g;
+ while(m=re.exec(f)){const a=dayIdx(m[1]);if(m[2]){const b=dayIdx(m[2]);if(a===0&&b===6){for(let d=0;d<7;d++)out.add(d)}else for(let d=a;;d=(d+1)%7){out.add(d);if(d===b)break}}else out.add(a)}return out}
+function tm(n,mm,ap){let h=+n+(mm?+mm/60:0);if(ap){ap=ap[0].toLowerCase();if(ap==='p'&&h<12)h+=12;if(ap==='a'&&h>=12)h-=12;return [h,1]}return [h,0]}
+function timesOf(f){f=f.replace(/\babout\b/g,'');
+ if(/\bdinner\b/i.test(f))return [17,22];
+ let m=f.match(/(\d{1,2})(?::(\d\d))?\s*([ap]\.?m\.?)?\s*[–-]\s*(midnight|(\d{1,2})(?::(\d\d))?\s*([ap]\.?m\.?)?)/i);
+ if(m){let [a,ea]=tm(m[1],m[2],m[3]);if(!ea&&a<=5)a+=12;let b;
+  if(/midnight/i.test(m[4]))b=24;else{let eb;[b,eb]=tm(m[5],m[6],m[7]);if(!eb){if(b===12&&a>=10)b=24;else if(a<12&&b<12&&b>a&&b-a<=4)b+=12;else while(b<=a&&b+12<=36)b+=12}}
+  if(b<=a)b+=24;return [a,b]}
+ m=f.match(/from\s+(noon|(\d{1,2})(?::(\d\d))?\s*([ap]\.?m\.?)?)/i);
+ if(m){let a;if(/noon/i.test(m[1]))a=12;else{let ea;[a,ea]=tm(m[2],m[3],m[4]);if(!ea&&a<=5)a+=12}return [a,Math.max(Math.min(a+8,24),22)]}
+ return null}
+function sched(str){const s={},closed=new Set();let pend=new Set(),any=false;
+ const dm=[...str.matchAll(/Nov\s+(\d{1,2})/g)].map(x=>+x[1]);
+ if(dm.length){const t=timesOf(str.replace(/Nov\s+\d{1,2}/g,''));return t?{dates:dm,t}:null}
+ for(const f of str.split(/[;,]|\band\b/)){if(/thanksgiving|unconfirmed|check/i.test(f)){pend=new Set();continue}
+  if(/closed/i.test(f)){daysOf(f).forEach(d=>closed.add(d));continue}
+  const d=daysOf(f),t=timesOf(f);
+  if(!t){d.forEach(x=>pend.add(x));continue}
+  const ds=d.size||pend.size?new Set([...d,...pend]):new Set([0,1,2,3,4,5,6]);ds.forEach(x=>{if(!closed.has(x))s[x]=t});pend=new Set();any=true}
+ closed.forEach(d=>delete s[d]);return any?{days:s}:null}
+function nowSea(){const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date()).map(x=>[x.type,x.value]));return {d:dayIdx(p.weekday),date:+p.day,mon:p.month,h:+p.hour+ +p.minute/60}}
+function isOpen(str,n){const sc=sched(str);if(!sc)return null;
+ if(sc.dates){if(n.mon!=='Nov')return false;const [a,b]=sc.t;return sc.dates.includes(n.date)&&n.h>=a&&n.h<b||sc.dates.includes(n.date-1)&&n.h+24<b}
+ const t=sc.days[n.d],y=sc.days[(n.d+6)%7];return !!(t&&n.h>=t[0]&&n.h<t[1]||y&&y[1]>24&&n.h+24<y[1])}
+function tint(){const n=nowSea();document.querySelectorAll('.hrs').forEach(e=>{const o=isOpen(e.dataset.h,n);e.classList.toggle('open',o===true);e.classList.toggle('shut',o===false)})}
+tint();setInterval(tint,60000);
 
 /* Maps */
 const fp=Object.values(P).filter(p=>p.ll);stays.forEach(x=>x.col='var(--stay)');Object.values(P).forEach(x=>x.col='var(--eat)');todo.forEach(x=>x.col='var(--do)');
