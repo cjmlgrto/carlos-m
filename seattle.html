@@ -115,7 +115,8 @@ h4{font-size:15px;font-weight:600;color:var(--secondary);margin-top:28px;padding
 .cap{margin-top:8px;font-size:13px;color:var(--secondary)}
 
 .rows{list-style:none}
-.rows li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 14px;padding:14px 0;border-bottom:1px solid var(--divider)}
+.rows li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 14px;padding:14px 0;position:relative}
+.rows li+li::before{content:'';position:absolute;top:0;left:78px;right:0;height:1px;background:var(--divider)}
 .num{grid-row:span 3;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
 .thumb{grid-row:span 6;flex:none;width:64px;height:64px;border-radius:10px;overflow:hidden;background:var(--water);position:relative;display:block}
 .thumb svg{display:block;width:100%;height:100%}
@@ -342,7 +343,7 @@ todo.forEach(t=>{t.area=t.area||DOAREA[t.n]||'e2'});
 const AREA_ID={e1:'pike',e2:'downtown',e7:'center',e3:'caphill',e4:'pioneer',e5:'fremont',e6:'ballard'};
 groups.forEach(g=>{g[4]=todo.filter(t=>t.area===g[2])});
 const AREAS=[...groups.map(g=>({id:AREA_ID[g[2]]||'elsewhere',t:g[0],mk:g[2],ks:g[3],dos:g[4]})),{id:'trips',t:'Day trips',mk:null,ks:[],dos:trips}];
-$('areas').innerHTML=AREAS.map(a=>`<section id="${a.id}"><h2>${esc(a.t)}</h2>${a.mk?`<div class="map" data-set="${a.mk}" role="img" aria-label="Map of ${esc(a.t)}"></div>`:''}<ul class="rows" style="margin-top:16px;border-top:1px solid var(--divider)">${a.ks.map(k=>row(P[k],k)).join('')}${a.dos.map(doRow).join('')}</ul></section>`).join('');
+$('areas').innerHTML=AREAS.map(a=>`<section id="${a.id}"><h2>${esc(a.t)}</h2>${a.mk?`<div class="map" data-set="${a.mk}" role="img" aria-label="Map of ${esc(a.t)}"></div>`:''}<ul class="rows" style="margin-top:8px">${a.ks.map(k=>row(P[k],k)).join('')}${a.dos.map(doRow).join('')}</ul></section>`).join('');
 $('navareas').innerHTML=AREAS.map(a=>`<a href="#${a.id}">${esc(a.t.split(/,| and /)[0])}</a>`).join('');
 /* Open now, Seattle time */
 const DAYS=['sun','mon','tue','wed','thu','fri','sat'];
