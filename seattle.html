@@ -232,6 +232,7 @@ stays.forEach((s,i)=>{s.no=i+1;s.ic='house'});
 
 /* Eat */
 const P={
+emmett:{n:'Emmett Watson’s Oyster Bar',k:'Oysters and fried seafood, hidden courtyard',a:'1916 Pike Pl',ll:[47.6101,-122.3427],u:'https://emmettwatsonsoysterbar.com'},
 meesum:{n:'Mee Sum Pastry',k:'Chinese buns and dim sum, takeout only',a:'1526 Pike Pl',ll:[47.6093,-122.3414],h:'Daily 8–7',u:'https://meesum.com'},
 marketgrill:{n:'Market Grill',k:'Blackened salmon sandwich and chowder',a:'1509 Pike Pl',ll:[47.6088,-122.3410],u:'https://www.pikeplacemarket.org/vendor/market-grill/'},
  aquarium:{n:'Seattle Aquarium',k:'Attraction',a:'Pier 59',ll:[47.6076,-122.3430],h:'Daily 9:30–6, Thanksgiving 9:30–4',u:'https://www.seattleaquarium.org'},
@@ -297,7 +298,7 @@ for(const k in P)P[k].ic='fork';
 const OPENTG=new Set(['saltys']);
 const CLOSED=new Set(['lowells','spinasse', 'canon', 'pinkdoor', 'piroshky', 'crumpet', 'oriental', 'hellenika', 'ono']);
 const groups=[
- ['Pike Place Market','','e1',['piroshky','meesum','marketgrill','oriental','crumpet','hellenika','ono','chowder','pinkdoor','lowells','lepichet','cobbs','zigzag']],
+ ['Pike Place Market','','e1',['piroshky','meesum','marketgrill','emmett','oriental','crumpet','hellenika','ono','chowder','pinkdoor','lowells','lepichet','cobbs','zigzag']],
  ['Belltown and Downtown','','e2',['kedai','umi','shiros','roccos','alba','seriouspie','assaggio','bathtub','aquarium','pst','narrative','postalley']],
  ['Seattle Center and Queen Anne','','e7',['vita']],
  ['Capitol Hill','','e3',['sead','spinasse','canon','golmok','unicorn','ladive','busan','altura']],
@@ -307,9 +308,9 @@ const groups=[
  ['Elsewhere','',null,['saltys','banhmiland']]
 ];
 const MEM=new Set(['sead','goodmart']);
-const VISITED=new Set(['piroshky','meesum','lowells','marketgrill','crumpet']);
+const VISITED=new Set(['piroshky','meesum','lowells','marketgrill','crumpet','hellenika','emmett']);
 VISITED.forEach(k=>{P[k].ic='check';P[k].col='#34c759'});
-const MARKET=new Set(['meesum','marketgrill','lowells','piroshky','oriental','crumpet','hellenika','ono','chowder','pinkdoor']);
+const MARKET=new Set(['meesum','marketgrill','emmett','lowells','piroshky','oriental','crumpet','hellenika','ono','chowder','pinkdoor']);
 const MUST={sead:'Most memorable meal, @seattle.grub',goodmart:'Most memorable meal, @seattle.grub',piroshky:'Pike Place Market',oriental:'Pike Place Market',lepichet:'Across from Pike Place Market',localtide:'Fremont and Ballard day',situ:'Fremont and Ballard day',steakeasy:'Fremont and Ballard day, go early',tanhuo:'Late night'};
 groups.forEach(g=>{const o=[...g[3].filter(k=>MEM.has(k)),...g[3].filter(k=>MUST[k]&&!MEM.has(k)),...g[3].filter(k=>!MUST[k])];g[3]=[...o.filter(k=>!VISITED.has(k)),...o.filter(k=>VISITED.has(k))]});
 let no=0;groups.forEach(g=>g[3].forEach(k=>{if(P[k].ll)P[k].no=++no}));
