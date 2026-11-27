@@ -310,8 +310,8 @@ const desc=(p,k)=>{let m=MUST[k]&&!LOCMUST.has(MUST[k])?MUST[k]:'',x=p.x||'';if(
 const hrs=t=>t?`<span class="sub hrs" data-h="${esc(t)}">${ico('clock')}${esc(t)}</span>`:'';
 const row=(p,k)=>`<li>${thumb(p,'var(--eat)')}
  <span class="name">${esc(p.n)}${MUST[k]?ico('star','must'):''}</span>
- ${desc(p,k)?`<span class="sub">${esc(desc(p,k))}</span>`:''}
  ${hrs(p.h)}
+ ${desc(p,k)?`<span class="sub">${esc(desc(p,k))}</span>`:''}
  <span class="links">${p.u?`<a href="${p.u}">Website</a>`:''}<a href="${mapUrl(p)}">Maps</a>${p.ig?`<a href="https://www.instagram.com/${p.ig}/">Instagram</a>`:''}</span></li>`;
 
 /* Do */
@@ -335,7 +335,7 @@ const trips=[
  {n:'Mount Si',k:'Full day by car',h:'Steep hike near North Bend. Discover Pass required for trailhead parking.',q:'Mount Si Trailhead, North Bend, WA',offShort:'North Bend',u:'https://dnr.wa.gov/natural-areas/natural-resources-conservation-areas/mount-si-natural-resources-conservation-area',l:'Trail info',ic:'tree'}
 ];
 todo.forEach((t,i)=>t.no=i+1);
-const doRow=t=>`<li>${thumb(t,'var(--do)')}<span class="name">${esc(t.n)}</span>${t.h?`<span class="sub">${esc(t.h)}</span>`:''}${hrs(t.k)}<span class="links">${t.u?`<a href="${t.u}">${t.l}</a>`:''}<a href="${mapUrl(t)}">Maps</a></span></li>`;
+const doRow=t=>`<li>${thumb(t,'var(--do)')}<span class="name">${esc(t.n)}</span>${hrs(t.k)}${t.h?`<span class="sub">${esc(t.h)}</span>`:''}<span class="links">${t.u?`<a href="${t.u}">${t.l}</a>`:''}<a href="${mapUrl(t)}">Maps</a></span></li>`;
 const DOAREA={'Seattle Christmas Market':'e7','Peter Miller Books':'e4','The Lemon Grove':'e4','Ferry to Bainbridge Island':'e2','Chihuly Garden and Glass':'e7','Seattle Art Museum':'e2','Magic in the Market':'e1','Merry Matsuri':'e2','Open Mic Night at Folio':'e1','Seattle Central Library':'e2','Kerry Park':'e7','Discovery Park':'e6'};
 todo.forEach(t=>{t.area=t.area||DOAREA[t.n]||'e2'});
 const AREA_ID={e1:'pike',e2:'downtown',e7:'center',e3:'caphill',e4:'pioneer',e5:'fremont',e6:'ballard'};
